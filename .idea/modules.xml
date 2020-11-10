@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Lesson10Synchronized/Lesson10Synchronized.iml" filepath="$PROJECT_DIR$/Lesson10Synchronized/Lesson10Synchronized.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson1Lists/Lesson1Lists.iml" filepath="$PROJECT_DIR$/Lesson1Lists/Lesson1Lists.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" filepath="$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" filepath="$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson4HashCodeEquals/Lesson4HashCodeEquals.iml" filepath="$PROJECT_DIR$/Lesson4HashCodeEquals/Lesson4HashCodeEquals.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson5Comparator/Lesson5Comparator.iml" filepath="$PROJECT_DIR$/Lesson5Comparator/Lesson5Comparator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson6Queue/Lesson6Queue.iml" filepath="$PROJECT_DIR$/Lesson6Queue/Lesson6Queue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson7Stack/Lesson7Stack.iml" filepath="$PROJECT_DIR$/Lesson7Stack/Lesson7Stack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson8Iterable/Lesson8Iterable.iml" filepath="$PROJECT_DIR$/Lesson8Iterable/Lesson8Iterable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson9MultithreadingStart/Lesson9MultithreadingStart.iml" filepath="$PROJECT_DIR$/Lesson9MultithreadingStart/Lesson9MultithreadingStart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/UdemyJavaAdvanced.iml" filepath="$PROJECT_DIR$/.idea/UdemyJavaAdvanced.iml" />
+    </modules>
+  </component>
+</project>
