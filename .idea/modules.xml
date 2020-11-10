@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Lesson10Synchronized/Lesson10Synchronized.iml" filepath="$PROJECT_DIR$/Lesson10Synchronized/Lesson10Synchronized.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson11ThreadPool/Lesson11ThreadPool.iml" filepath="$PROJECT_DIR$/Lesson11ThreadPool/Lesson11ThreadPool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson12PatternProducerConsumer/Lesson12PatternProducerConsumer.iml" filepath="$PROJECT_DIR$/Lesson12PatternProducerConsumer/Lesson12PatternProducerConsumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson13WaitNotify/Lesson13WaitNotify.iml" filepath="$PROJECT_DIR$/Lesson13WaitNotify/Lesson13WaitNotify.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson1Lists/Lesson1Lists.iml" filepath="$PROJECT_DIR$/Lesson1Lists/Lesson1Lists.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" filepath="$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" filepath="$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" />
