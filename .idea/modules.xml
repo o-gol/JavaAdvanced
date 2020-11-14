@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/Lesson14CountDownLatch/Lesson14CountDownLatch.iml" filepath="$PROJECT_DIR$/Lesson14CountDownLatch/Lesson14CountDownLatch.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson15ReentrrantLock/Lesson15ReentrrantLock.iml" filepath="$PROJECT_DIR$/Lesson15ReentrrantLock/Lesson15ReentrrantLock.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson16Semophore/Lesson16Semophore.iml" filepath="$PROJECT_DIR$/Lesson16Semophore/Lesson16Semophore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson17DeadLock/Lesson17DeadLock.iml" filepath="$PROJECT_DIR$/Lesson17DeadLock/Lesson17DeadLock.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson1Lists/Lesson1Lists.iml" filepath="$PROJECT_DIR$/Lesson1Lists/Lesson1Lists.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" filepath="$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" filepath="$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" />
