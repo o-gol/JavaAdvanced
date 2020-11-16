@@ -1,45 +1,50 @@
 public class Homwork1 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Object o=new Object();
-        Test test=new Test();
+        Test test=new Test(Thread.currentThread());
         Thread thread=new Thread(test);
         System.out.println(thread.getState());
         thread.start();
-        try {
-            Thread.currentThread().wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        synchronized (thread){
+            thread.wait();
         }
-        System.out.println(thread.getState());
-
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            thread.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         System.out.println(thread.getState());
     }
 
-    static class Test implements Runnable{
-        Object o=new Object();
+    static class Test implements Runnable {
+        Thread thread;
+        int in=0;
+        Object o = new Object();
+
+        public Test(Thread thread) {
+            this.thread = thread;
+        }
+
         @Override
         public void run() {
-               System.out.println(Thread.currentThread().getState());
-           synchronized (o){
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-               System.out.println(Thread.currentThread().getState());
-           }
-           //notify();
+            System.out.println(Thread.currentThread().getState());
+            synchronized (this){
+            for (int i = 0; i < 100; i++) {
+                in++;
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
+            }
+            System.out.println(thread.getState());
+            notify();
+            }
 
         }
     }
+    }
 
-}
 
 
