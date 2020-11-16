@@ -10,7 +10,10 @@
       <module fileurl="file://$PROJECT_DIR$/Lesson15ReentrrantLock/Lesson15ReentrrantLock.iml" filepath="$PROJECT_DIR$/Lesson15ReentrrantLock/Lesson15ReentrrantLock.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson16Semophore/Lesson16Semophore.iml" filepath="$PROJECT_DIR$/Lesson16Semophore/Lesson16Semophore.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson17DeadLock/Lesson17DeadLock.iml" filepath="$PROJECT_DIR$/Lesson17DeadLock/Lesson17DeadLock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson18Interupt/Lesson18Interupt.iml" filepath="$PROJECT_DIR$/Lesson18Interupt/Lesson18Interupt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson19CallableFuture/Lesson19CallableFuture.iml" filepath="$PROJECT_DIR$/Lesson19CallableFuture/Lesson19CallableFuture.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson1Lists/Lesson1Lists.iml" filepath="$PROJECT_DIR$/Lesson1Lists/Lesson1Lists.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson20HomeWorkMultithreading/Lesson20HomeWorkMultithreading.iml" filepath="$PROJECT_DIR$/Lesson20HomeWorkMultithreading/Lesson20HomeWorkMultithreading.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" filepath="$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" filepath="$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson4HashCodeEquals/Lesson4HashCodeEquals.iml" filepath="$PROJECT_DIR$/Lesson4HashCodeEquals/Lesson4HashCodeEquals.iml" />
