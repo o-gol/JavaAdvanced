@@ -1,3 +1,5 @@
+package firstCodeState;
+
 public class Homwork1Author {
 //    public static void main(String[] args) {
 //        Thread thread = new Thread() {
