@@ -1,7 +1,5 @@
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lambda {
@@ -39,6 +37,19 @@ public class Lambda {
         int b=integers.stream().reduce((left, right) -> left+right).get();
         System.out.println(a);
         System.out.println(b );
+
+        //вызов друг за другом
+        ints=Arrays.stream(ints).map(operand -> operand*3).filter(operand -> operand%2==0).map(operand -> operand*2).toArray();
+        System.out.println(Arrays.toString(ints));
+
+        Set<Integer> setrs=new HashSet<>();
+        setrs.add(10);
+        setrs.add(34);
+        setrs.add(56);
+        setrs=setrs.stream().map(integer -> integer*3).collect(Collectors.toSet());
+        System.out.println(setrs);
+
+
 
 
 
