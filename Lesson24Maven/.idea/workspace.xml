@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="892bb9ab-3034-4c36-9bde-8ede88503551" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore123" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +44,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605905078369</updated>
-      <workItem from="1605905088679" duration="1568000" />
+      <workItem from="1605905088679" duration="1823000" />
+      <workItem from="1605906939760" duration="1919000" />
+      <workItem from="1606579778373" duration="63000" />
     </task>
     <servers />
   </component>
@@ -55,6 +58,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="121" y="0" key="#Project_Structure/0.0.1280.680@0.0.1280.680" timestamp="1605905363845" />
+    <state x="413" y="142" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605907950960">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="413" y="142" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1605907950960" />
     <state x="297" y="151" width="672" height="677" key="run.anything.popup" timestamp="1605905191755">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
