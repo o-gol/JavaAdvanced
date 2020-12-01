@@ -1,0 +1,17 @@
+
+git remote set-url origin https://github.com/o-gol/projektsJS.git
+git remote set-url origin https://github.com/o-gol/JavaAdvanced.git
+
+
+git clone https://github.com/o-gol/JavaAdvanced.git
+
+
+i:
+cd I:\2. Java\JavaProjekts\JavaAdvanced
+
+git config --global user.name "oleg"
+git config --global user.email "oleg@email.com"
+
+
+git log --oneline
+git log
