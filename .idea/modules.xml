@@ -22,6 +22,7 @@
       <module fileurl="file://$PROJECT_DIR$/Lesson28Nested/Lesson28Nested.iml" filepath="$PROJECT_DIR$/Lesson28Nested/Lesson28Nested.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson29Exceptions/Lesson29Exceptions.iml" filepath="$PROJECT_DIR$/Lesson29Exceptions/Lesson29Exceptions.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" filepath="$PROJECT_DIR$/Lesson2Maps/Lesson2Maps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lesson30Streams/Lesson30Streams.iml" filepath="$PROJECT_DIR$/Lesson30Streams/Lesson30Streams.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" filepath="$PROJECT_DIR$/Lesson3Sets/Lesson3Sets.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson4HashCodeEquals/Lesson4HashCodeEquals.iml" filepath="$PROJECT_DIR$/Lesson4HashCodeEquals/Lesson4HashCodeEquals.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lesson5Comparator/Lesson5Comparator.iml" filepath="$PROJECT_DIR$/Lesson5Comparator/Lesson5Comparator.iml" />
