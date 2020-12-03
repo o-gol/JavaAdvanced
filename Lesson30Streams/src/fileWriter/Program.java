@@ -1,46 +1,113 @@
 package fileWriter;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Program {
-    public static void main(String[] args) {
-        NavigableMap<AverageStudentGrade, Set<SubjectGrade>> map = createGrades();
-        FileWriter writer = null;
-        try {
+    private static final String FILE_IN_NAME = "Grade Book.txt";
+    private static final String FILE_OUT_NAME = "Grade Book Byte.txt";
+    private static final String FILE_OUT_NAME_MATHER = "Accounts Book Mather.txt";
+    private static final String FILE_BANK_ACCOUNTS = "Bank Accounts.txt";
 
-            writer = new FileWriter("Grade Book.txt");
+    public static void main(String[] args) throws IOException {
+//        NavigableMap<AverageStudentGrade, Set<SubjectGrade>> map = createGrades();
+//        writeGradesToFile(map);
+//        readGradeFromFile();
+//        byteReadWrite();
+        Pattern pattern =Pattern.compile("studentName");
+        Matcher matcher=pattern.matcher(FILE_IN_NAME);
+
+        while (matcher.find()){
+            System.out.println("Start");
+            try (FileWriter writer=new FileWriter(FILE_OUT_NAME_MATHER);){
+                writer.write(matcher.group());
+
+            }
+            System.out.println("End");
+        }
+
+
+        /*try (
+                Scanner scanner = new Scanner(System.in);
+                Formatter formatter = new Formatter(FILE_BANK_ACCOUNTS);
+                )
+        {
+
+            for (int i = 0; i < 3; i++) {
+                System.out.println("Input id,name,balance");
+                formatter.format("id account-%s, name account-%s, balance of account-%s\n",
+                        scanner.nextLine(),
+                        scanner.nextLine(),
+                        scanner.nextLine())
+
+                ;
+
+            }
+        }*/
+
+
+    }
+
+    private static void byteReadWrite() throws IOException {
+        try (FileInputStream byteReader = new FileInputStream(FILE_IN_NAME);
+             FileOutputStream byteWriter = new FileOutputStream(FILE_OUT_NAME)) {
+
+            byte[] arrByte = byteReader.readAllBytes();
+            for (int i = 0; i < arrByte.length; i++) {
+                System.out.print(arrByte[i]);
+            }
+            byteWriter.write(arrByte);
+            System.out.println("Byte read/write finished");
+
+        }
+    }
+
+
+    private static void readGradeFromFile() throws IOException {
+        FileReader fileReader = new FileReader(FILE_IN_NAME);
+        System.out.println(fileReader.getEncoding());
+        BufferedReader buffReader = new BufferedReader(fileReader);
+        String s;
+        while ((s = buffReader.readLine()) != null) {
+            System.out.println(s);
+        }
+        System.out.println();
+        fileReader = new FileReader(FILE_IN_NAME);
+
+        int c;
+        while ((c = fileReader.read()) != -1) {
+            System.out.print(c);
+            if (c == 10)
+                System.out.println();
+            if (c == 32)
+                System.out.print(" ");
+        }
+    }
+
+    private static void writeGradesToFile(NavigableMap<AverageStudentGrade, Set<SubjectGrade>> map) throws IOException {
+
+        try (FileWriter writer = new FileWriter(FILE_IN_NAME)) {
             for (AverageStudentGrade grade :
                     map.keySet()) {
                 /*System.out.println(String.format("============================================\n"));
                 System.out.println(String.format(String.format("%s\n",grade)));*/
-                writer.write(String.format("============================================\n"));
-                writer.write(String.format("%s\n", grade));
+                writer.write("============================================\n\n");
+
+                writer.write(String.format("%s\n\n", grade));
                 for (SubjectGrade subjectGrade :
                         map.get(grade)) {
                     writer.write(String.format("%s\n", subjectGrade));
 
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-
-
+        System.out.printf("Info was write in file %s\n", FILE_IN_NAME);
     }
 
-
-    public static NavigableMap<AverageStudentGrade, Set<SubjectGrade>> createGrades() {
+    private static NavigableMap<AverageStudentGrade, Set<SubjectGrade>> createGrades() {
         Set<SubjectGrade> alexGrades = new TreeSet<>();
         alexGrades.add(new SubjectGrade("Mathema", 67));
         alexGrades.add(new SubjectGrade("Leterat", 56));

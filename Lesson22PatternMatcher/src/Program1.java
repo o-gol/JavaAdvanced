@@ -3,19 +3,19 @@ import java.util.regex.Pattern;
 
 public class Program1 {
     public static void main(String[] args) {
-        String text="E-mail Емайл People don’t write letter today anymo They rarely " +
-                "use the services of post office The reason is the appearance of Internet " +
-                "connection Since the time people learned how to exchange documents through exemple@yandex.ru " +
-                "the World Wide Web, many things jon@google.by have changed.";
+//        String text="E-mail Емайл People don’t write letter today anymo They rarely " +
+//                "use the services of post office The reason is the appearance of Internet " +
+//                "connection Since the time people learned how to exchange documents through exemple@yandex.ru " +
+//                "the World Wide Web, many things jon@google.by have changed.";
 
-//        String text="\n" +
-//                "E-mail\tЕмайл\n" +
-//                "People don’t write letter today anymore.\n" +
-//                " They rarely use the services of post office.\n" +
-//                " The reason is the appearance of Internet connection.\n" +
-//                " Since the time people learned how to exchange documents through exemple@yandex.ru the World Wide Web, many things have changed.";
-//
-//
+        String text="\n" +
+                "E-mail\tЕмайл\n" +
+                "People don’t write letter today anymore.\n" +
+                " They rarely use the services of post office.\n" +
+                " The reason is the appearance of Internet connection.\n" +
+                " Since the time people learned how to exchange documents through exemple@yandex.ru the World Wide Web, many things have changed.";
+
+
 //        Pattern pattern=Pattern.compile("exemple@yandex.ru");
         Pattern pattern=Pattern.compile("([a-zA-Z0-9]+)@([a-zA-Z]+)\\.([a-zA-Z]+)");
         Matcher matcher=pattern.matcher(text);
