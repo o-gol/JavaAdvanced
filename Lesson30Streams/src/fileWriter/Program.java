@@ -13,42 +13,47 @@ public class Program {
     private static final String FILE_BANK_ACCOUNTS = "Bank Accounts.txt";
 
     public static void main(String[] args) throws IOException {
-//        NavigableMap<AverageStudentGrade, Set<SubjectGrade>> map = createGrades();
-//        writeGradesToFile(map);
-//        readGradeFromFile();
-//        byteReadWrite();
-        Pattern pattern =Pattern.compile("studentName");
-        Matcher matcher=pattern.matcher(FILE_IN_NAME);
-
-        while (matcher.find()){
-            System.out.println("Start");
-            try (FileWriter writer=new FileWriter(FILE_OUT_NAME_MATHER);){
-                writer.write(matcher.group());
-
-            }
-            System.out.println("End");
-        }
+        NavigableMap<AverageStudentGrade, Set<SubjectGrade>> map = createGrades();
+        writeGradesToFile(map);
+        readGradeFromFile();
+        byteReadWrite();
+        parseGradeBookAndWriteInAccountBookMather();
+        parseWithFormatter();
 
 
-        /*try (
+    }
+
+    private static void parseWithFormatter() throws FileNotFoundException {
+        try (
                 Scanner scanner = new Scanner(System.in);
-                Formatter formatter = new Formatter(FILE_BANK_ACCOUNTS);
-                )
-        {
+                Formatter formatter = new Formatter(FILE_BANK_ACCOUNTS)
+                        )
+                {
 
-            for (int i = 0; i < 3; i++) {
-                System.out.println("Input id,name,balance");
-                formatter.format("id account-%s, name account-%s, balance of account-%s\n",
-                        scanner.nextLine(),
-                        scanner.nextLine(),
-                        scanner.nextLine())
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println("Input id,name,balance");
+                        formatter.format("id account-%s, name account-%s%s, balance of account-%s\n",
+                                scanner.nextInt(),
+                                scanner.nextLine(),
+                                scanner.nextLine(),
+                                scanner.nextFloat())
 
-                ;
+                        ;
 
+                    }
+                }
+    }
+
+    private static void parseGradeBookAndWriteInAccountBookMather() throws FileNotFoundException {
+        try (Scanner scanner = new Scanner(new File(FILE_IN_NAME));
+             Formatter formatter = new Formatter(FILE_OUT_NAME_MATHER)) {
+
+            while (scanner.hasNextLine()) {
+                Matcher matcher = Pattern.compile("studentName='([a-zA-Z0-9]+)'").matcher(scanner.nextLine());
+                while (matcher.find())
+                    formatter.format("Student-%s\n", matcher.group(1));
             }
-        }*/
-
-
+        }
     }
 
     private static void byteReadWrite() throws IOException {
@@ -56,8 +61,8 @@ public class Program {
              FileOutputStream byteWriter = new FileOutputStream(FILE_OUT_NAME)) {
 
             byte[] arrByte = byteReader.readAllBytes();
-            for (int i = 0; i < arrByte.length; i++) {
-                System.out.print(arrByte[i]);
+            for (byte b : arrByte) {
+                System.out.print(b);
             }
             byteWriter.write(arrByte);
             System.out.println("Byte read/write finished");
