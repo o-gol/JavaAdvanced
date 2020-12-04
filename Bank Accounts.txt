@@ -1,3 +1,0 @@
-id account-1, name account-jack, balance of account-5.0
-id account-2, name account-jimm, balance of account-4.5
-id account-3, name account-ann, balance of account-5.8

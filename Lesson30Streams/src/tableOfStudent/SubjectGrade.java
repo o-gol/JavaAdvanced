@@ -1,8 +1,8 @@
-package fileWriter;
+package tableOfStudent;
 
-import java.util.Set;
+import java.io.Serializable;
 
-public class SubjectGrade implements Comparable<SubjectGrade> {
+public class SubjectGrade implements Comparable<SubjectGrade>, Serializable {
 
     private final String subject;
     private final float grade;
@@ -30,6 +30,7 @@ public class SubjectGrade implements Comparable<SubjectGrade> {
         return "SubjectGrade{" +
                 "subject='" + subject + '\'' +
                 ", grade=" + grade +
+                ", super=" + super.toString() +
                 '}';
     }
 }
