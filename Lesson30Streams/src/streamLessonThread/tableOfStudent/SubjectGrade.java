@@ -1,4 +1,4 @@
-package tableOfStudent;
+package streamLessonThread.tableOfStudent;
 
 import java.io.Serializable;
 

@@ -1,6 +1,6 @@
-package fileIO;
+package streamLesson.fileIO;
 
-import tableOfStudent.Student;
+import streamLesson.tableOfStudent.Student;
 
 import java.io.*;
 import java.util.ArrayList;

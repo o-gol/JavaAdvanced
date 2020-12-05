@@ -1,8 +1,8 @@
-package fileIO;
+package streamLesson.fileIO;
 
-import tableOfStudent.AverageStudentGrade;
-import tableOfStudent.Student;
-import tableOfStudent.SubjectGrade;
+import streamLesson.tableOfStudent.AverageStudentGrade;
+import streamLesson.tableOfStudent.Student;
+import streamLesson.tableOfStudent.SubjectGrade;
 
 import java.io.FileWriter;
 import java.io.IOException;

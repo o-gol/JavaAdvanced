@@ -1,6 +1,6 @@
-package tableOfStudent;
+package streamLesson.tableOfStudent;
 
-import fileIO.Writer;
+import streamLesson.fileIO.Writer;
 
 import java.io.Serializable;
 import java.util.*;

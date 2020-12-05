@@ -1,4 +1,4 @@
-package tableOfStudent;
+package streamLesson.tableOfStudent;
 
 import java.io.Serializable;
 import java.util.NavigableMap;

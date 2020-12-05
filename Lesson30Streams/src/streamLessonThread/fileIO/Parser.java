@@ -1,4 +1,4 @@
-package fileIO;
+package streamLessonThread.fileIO;
 
 import java.io.File;
 import java.io.FileNotFoundException;
