@@ -37,6 +37,8 @@ public class Program {
         System.out.println(System.getProperty("user.dir"));
         double t2=System.currentTimeMillis();
         System.out.println(t2-t1);
+        FileShower fileShower=new FileShower("Lesson1.bit");
+        fileShower.showAll();
     }
 
 
