@@ -5,6 +5,7 @@ import streamLesson.tableOfStudent.Student;
 import streamLesson.tableOfStudent.SubjectGrade;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.*;
 
 
@@ -37,8 +38,12 @@ public class Program {
         System.out.println(System.getProperty("user.dir"));
         double t2=System.currentTimeMillis();
         System.out.println(t2-t1);
-        FileShower fileShower=new FileShower("Lesson1.bit");
+        FileShower fileShower=new FileShower("Lesson30Streams\\src\\streamLesson\\files\\Lesson1.bit");
         fileShower.showAll();
+//        File file=new File("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
+//        fileShower.showNioAll("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
+//        fileShower.showNioAll("Lesson30Streams\\src\\streamLesson\\files\\files");
+        fileShower.showNioAll(FILE_IN_NAME);
     }
 
 
