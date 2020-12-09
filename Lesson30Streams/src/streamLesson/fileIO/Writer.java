@@ -4,10 +4,10 @@ import streamLesson.tableOfStudent.AverageStudentGrade;
 import streamLesson.tableOfStudent.Student;
 import streamLesson.tableOfStudent.SubjectGrade;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
@@ -62,6 +62,49 @@ public class Writer {
             }
         }
         System.out.printf("Info was write in file %s\n", fileIn);
+    }
+    void nioWriteFromBuffer(String fileIn,String fileOut) throws IOException {
+       Path pathIn=Paths.get(fileIn);
+       Path pathOut=Paths.get(fileOut);
+        Charset charset=Charset.forName("UTF-8");
+        BufferedReader bf=Reader.nioReadFileFromBuffer(fileIn);
+        try(BufferedWriter bw=Files.newBufferedWriter(pathOut,charset)) {
+            String s;
+            while ((s=bf.readLine())!=null)
+            {
+                bw.write(s+"\n");
+
+            }
+        } catch (IOException e) {
+
+        }
+
+    }
+    void nioWriteFromStream(String fileIn,String fileOut) throws IOException{
+       Path pathOut=Paths.get(fileOut);
+       Path pathIn=Paths.get(fileIn);
+       OutputStream out=Files.newOutputStream(pathOut);
+       InputStream in=Files.newInputStream(pathIn);
+//       BufferedInputStream bis=new BufferedInputStream(in);
+//       BufferedOutputStream bos=new BufferedOutputStream(out);
+       int b;
+       /*while ((b=bis.read())!=-1){
+           bos.write(b);
+       }
+       if(bis!=null&&bos!=null){
+           bos.close();
+           bis.close();
+       }*/
+       while ((b=in.read())!=-1){
+           out.write(b);
+       }
+       if(in!=null&&out!=null){
+           in.close();
+           out.close();
+       }
+
+
+
     }
 
 }
