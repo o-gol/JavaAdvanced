@@ -13,6 +13,7 @@ public class Program {
     private static final String FILE_IN_NAME = "Lesson30Streams\\src\\streamLesson\\files\\Grade Book.txt";
     private static final String FILE_IN_NAME_BINARY = "Lesson30Streams\\src\\streamLesson\\files\\Student Grade Book Binary.bin";
     private static final String FILE_OUT_NAME = "Lesson30Streams\\src\\streamLesson\\files\\Grade Book Byte.txt";
+    private static final String FILE_OUT_NAME_NIO_BUFFER = "Lesson30Streams\\src\\streamLesson\\files\\Grade Book NIO Buffer.txt";
     private static final String FILE_OUT_NAME_MATHER = "Lesson30Streams\\src\\streamLesson\\files\\Accounts Book Mather.txt";
     private static final String FILE_BANK_ACCOUNTS = "Lesson30Streams\\src\\streamLesson\\files\\Bank Accounts.txt";
 
@@ -43,7 +44,11 @@ public class Program {
 //        File file=new File("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
 //        fileShower.showNioAll("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
 //        fileShower.showNioAll("Lesson30Streams\\src\\streamLesson\\files\\files");
-        fileShower.showNioAll(FILE_IN_NAME);
+//        fileShower.showNioAll(FILE_IN_NAME);
+//        reader.readFileFull(FILE_IN_NAME);
+//        reader.nioReadFileFrom(FILE_IN_NAME);
+        writer.nioWriteFromBuffer(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
+
     }
 
 

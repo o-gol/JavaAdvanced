@@ -3,6 +3,10 @@ package streamLesson.fileIO;
 import streamLesson.tableOfStudent.Student;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +79,51 @@ public class Reader {
         }
 
         return studentList;
+    }
+
+    void readFileFull(String filePath) throws IOException {
+        Path path= Paths.get(filePath);
+        StringBuilder sb=new StringBuilder();
+//        sb.append(Files.readAllLines(path));  //считывание всего файла за раз
+//        System.out.println(sb.toString().replace(",","\n"));
+//        System.out.println(sb);
+        String s=new String();
+        for (String s1:
+                Files.readAllLines(path)  ) {
+            sb.append(s1);
+            s+=s1+"\n";
+
+//            System.out.println(s);
+        }
+//        System.out.println(sb);
+        System.out.println(s);
+    }
+    static BufferedReader nioReadFileFrom(String filePath) throws IOException {
+        Path path= Paths.get(filePath);
+        Charset charset=Charset.forName("UTF-8");
+        BufferedReader  bf = Files.newBufferedReader(path,charset);
+        /*try {
+             bf=Files.newBufferedReader(path,charset);
+            String s;
+            while (!((s=bf.readLine())==null)){
+                System.out.println(s);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally{
+            if(bf!=null){
+
+                try {
+                    bf.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }*/
+
+        return bf;
+
+
+
     }
 
 }
