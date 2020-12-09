@@ -48,8 +48,8 @@ public class Program {
 //        reader.readFileFull(FILE_IN_NAME);
 //        reader.nioReadFileFromBuffer(FILE_IN_NAME);
 //        writer.nioWriteFromBuffer(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
-//        writer.nioWriteFromStream(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
         reader.nioReadFileFromStream(FILE_IN_NAME);
+        writer.nioWriteFromStream(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
 
 
 

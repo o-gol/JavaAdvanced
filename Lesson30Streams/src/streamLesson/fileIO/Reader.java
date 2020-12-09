@@ -134,8 +134,8 @@ public class Reader {
     nioReadFileFromStream(String fileIn){
         Path path=Paths.get(fileIn);
         Charset charset=Charset.forName("UTF-8");
-        try(InputStream in=Files.newInputStream(path)){
-            BufferedReader bf=new BufferedReader(new InputStreamReader(in));
+        try(InputStream in=Files.newInputStream(path);
+            BufferedReader bf=new BufferedReader(new InputStreamReader(in,charset))){
             String s;
             while (!((s=bf.readLine())==null))
                 System.out.println(s);

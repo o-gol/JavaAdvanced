@@ -9,9 +9,12 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
+
+import static java.nio.file.StandardOpenOption.*;
 
 public class Writer {
 
@@ -83,7 +86,7 @@ public class Writer {
     void nioWriteFromStream(String fileIn,String fileOut) throws IOException{
        Path pathOut=Paths.get(fileOut);
        Path pathIn=Paths.get(fileIn);
-       OutputStream out=Files.newOutputStream(pathOut);
+       OutputStream out=Files.newOutputStream(pathOut, CREATE, APPEND);
        InputStream in=Files.newInputStream(pathIn);
 //       BufferedInputStream bis=new BufferedInputStream(in);
 //       BufferedOutputStream bos=new BufferedOutputStream(out);
