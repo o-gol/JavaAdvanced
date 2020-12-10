@@ -3,6 +3,8 @@ package streamLesson.fileIO;
 import streamLesson.tableOfStudent.Student;
 
 import java.io.*;
+import java.nio.channels.Channel;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -144,6 +146,18 @@ public class Reader {
 
         }
 
+    }
+
+    void nioReadFromChannel(String fileIn){
+        try (RandomAccessFile raf=new RandomAccessFile(fileIn,"rw")){
+
+            FileChannel channel = raf.getChannel();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
