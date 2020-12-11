@@ -5,6 +5,7 @@ import streamLesson.tableOfStudent.Student;
 import streamLesson.tableOfStudent.SubjectGrade;
 
 import java.io.*;
+import java.nio.channels.Channel;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -16,6 +17,7 @@ public class Program {
     private static final String FILE_OUT_NAME_NIO_BUFFER = "Lesson30Streams\\src\\streamLesson\\files\\Grade Book NIO Buffer.txt";
     private static final String FILE_OUT_NAME_MATHER = "Lesson30Streams\\src\\streamLesson\\files\\Accounts Book Mather.txt";
     private static final String FILE_BANK_ACCOUNTS = "Lesson30Streams\\src\\streamLesson\\files\\Bank Accounts.txt";
+    private static final String FILE_CHANEL_WR = "Lesson30Streams\\src\\streamLesson\\files\\Chanels File Write Read.txt";
 
     public static void main(String[] args) throws IOException {
 
@@ -48,8 +50,11 @@ public class Program {
 //        reader.readFileFull(FILE_IN_NAME);
 //        reader.nioReadFileFromBuffer(FILE_IN_NAME);
 //        writer.nioWriteFromBuffer(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
-        reader.nioReadFileFromStream(FILE_IN_NAME);
-        writer.nioWriteFromStream(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
+//        reader.nioReadFileFromStream(FILE_IN_NAME);
+//        writer.nioWriteFromStream(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
+        reader.nioReadFromChannel(FILE_IN_NAME);
+
+
 
 
 

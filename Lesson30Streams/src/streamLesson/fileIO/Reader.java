@@ -3,6 +3,8 @@ package streamLesson.fileIO;
 import streamLesson.tableOfStudent.Student;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.ByteChannel;
 import java.nio.channels.Channel;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -65,7 +67,7 @@ public class Reader {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileInBin))) {
             boolean bool = true;
             while (bool) {
-            Student s = (Student) objectInputStream.readObject();
+                Student s = (Student) objectInputStream.readObject();
                 if (!(s.getGrades() == null)) {
                     studentList.add(s);
                 } else
@@ -75,7 +77,7 @@ public class Reader {
 
         } catch (IOException e) {
             System.out.println("File not consist.Program terminated");
-        }catch ( ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             System.out.println("Invalid Type");
 
         }
@@ -84,16 +86,16 @@ public class Reader {
     }
 
     void readFileFull(String filePath) throws IOException {
-        Path path= Paths.get(filePath);
-        StringBuilder sb=new StringBuilder();
+        Path path = Paths.get(filePath);
+        StringBuilder sb = new StringBuilder();
 //        sb.append(Files.readAllLines(path));  //считывание всего файла за раз
 //        System.out.println(sb.toString().replace(",","\n"));
 //        System.out.println(sb);
-        String s=new String();
-        for (String s1:
-                Files.readAllLines(path)  ) {
+        String s = new String();
+        for (String s1 :
+                Files.readAllLines(path)) {
             sb.append(s1);
-            s+=s1+"\n";
+            s += s1 + "\n";
 
 //            System.out.println(s);
         }
@@ -103,9 +105,9 @@ public class Reader {
 
 
     static BufferedReader nioReadFileFromBuffer(String filePath) throws IOException {
-        Path path= Paths.get(filePath);
-        Charset charset=Charset.forName("UTF-8");
-        BufferedReader  bf = Files.newBufferedReader(path,charset);
+        Path path = Paths.get(filePath);
+        Charset charset = Charset.forName("UTF-8");
+        BufferedReader bf = Files.newBufferedReader(path, charset);
         /*try {
              bf=Files.newBufferedReader(path,charset);
             String s;
@@ -127,31 +129,42 @@ public class Reader {
         return bf;
 
 
-
     }
 
-    static
-            void
+    static void
 //    InputStream
-    nioReadFileFromStream(String fileIn){
-        Path path=Paths.get(fileIn);
-        Charset charset=Charset.forName("UTF-8");
-        try(InputStream in=Files.newInputStream(path);
-            BufferedReader bf=new BufferedReader(new InputStreamReader(in,charset))){
+    nioReadFileFromStream(String fileIn) {
+        Path path = Paths.get(fileIn);
+        Charset charset = Charset.forName("UTF-8");
+        try (InputStream in = Files.newInputStream(path);
+             BufferedReader bf = new BufferedReader(new InputStreamReader(in, charset))) {
             String s;
-            while (!((s=bf.readLine())==null))
+            while (!((s = bf.readLine()) == null))
                 System.out.println(s);
 
-        }catch (IOException e){
+        } catch (IOException e) {
 
         }
 
     }
 
-    void nioReadFromChannel(String fileIn){
-        try (RandomAccessFile raf=new RandomAccessFile(fileIn,"rw")){
+    void nioReadFromChannel(String fileIn) {
+        try (RandomAccessFile raf = new RandomAccessFile(fileIn, "rw");
+             FileChannel channel = raf.getChannel();
+        ) {
 
-            FileChannel channel = raf.getChannel();
+            ByteBuffer bb = ByteBuffer.allocate(100);
+            int i;
+            while ((i = channel.read(bb)) > 0) {
+
+                bb.flip();
+                while (bb.hasRemaining()) {
+                    System.out.print((char) bb.get());
+//                    char ch=(char)bb.get();
+
+                }
+                bb.clear();
+            }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -159,5 +172,22 @@ public class Reader {
             e.printStackTrace();
         }
     }
+
+
+
+    /*void  nioReadFromChannel(String fileIn){
+
+        Path path=Paths.get(fileIn);
+        try(ByteChannel bc=
+                    Files.newByteChannel(path);
+        ){
+            int i;
+            while ((i=bc.read())!=-1)
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }*/
 
 }
