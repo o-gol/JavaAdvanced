@@ -12,6 +12,7 @@ import java.util.*;
 
 public class Program {
     private static final String FILE_IN_NAME = "Lesson30Streams\\src\\streamLesson\\files\\Grade Book.txt";
+    private static final String FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER = "Lesson30Streams\\src\\streamLesson\\files\\Example buffer Grade Book.txt";
     private static final String FILE_IN_NAME_BINARY = "Lesson30Streams\\src\\streamLesson\\files\\Student Grade Book Binary.bin";
     private static final String FILE_OUT_NAME = "Lesson30Streams\\src\\streamLesson\\files\\Grade Book Byte.txt";
     private static final String FILE_OUT_NAME_NIO_BUFFER = "Lesson30Streams\\src\\streamLesson\\files\\Grade Book NIO Buffer.txt";
@@ -52,12 +53,8 @@ public class Program {
 //        writer.nioWriteFromBuffer(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
 //        reader.nioReadFileFromStream(FILE_IN_NAME);
 //        writer.nioWriteFromStream(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
-        reader.nioReadFromChannel(FILE_IN_NAME);
-
-
-
-
-
+//        reader.nioReadFromChannel(FILE_IN_NAME);
+        writer.nioWriteFromChannel(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
     }
 
 

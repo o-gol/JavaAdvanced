@@ -5,6 +5,10 @@ import streamLesson.tableOfStudent.Student;
 import streamLesson.tableOfStudent.SubjectGrade;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channel;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -108,6 +112,26 @@ public class Writer {
 
 
 
+    }
+    void nioWriteFromChannel(String fileOut){
+       String string="Я использую java.НИО.каналы.FileChannel, чтобы открыть файл и заблокировать его, а затем записать InputStream в выходной файл.\n" +
+               "InputStream может быть открыт другим файлом, URL, сокетом или чем угодно.\n Я написал следующие коды:" +
+               "";
+       byte[] bytesString=string.getBytes();
+        try (RandomAccessFile raf=new RandomAccessFile(fileOut,"rw");
+        FileChannel fc=raf.getChannel();){
+            ByteBuffer bb=ByteBuffer.wrap(bytesString,0,bytesString.length);
+            //while (bb.hasRemaining())
+                fc.write(bb);
+                bb.flip();
+
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

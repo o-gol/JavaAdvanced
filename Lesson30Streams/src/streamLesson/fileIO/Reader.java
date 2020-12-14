@@ -156,7 +156,6 @@ public class Reader {
             ByteBuffer bb = ByteBuffer.allocate(100);
             int i;
             while ((i = channel.read(bb)) > 0) {
-
                 bb.flip();
                 while (bb.hasRemaining()) {
                     System.out.print((char) bb.get());
