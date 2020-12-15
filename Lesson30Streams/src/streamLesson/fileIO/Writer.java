@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 
+import static java.nio.ByteBuffer.allocate;
+import static java.nio.ByteBuffer.wrap;
 import static java.nio.file.StandardOpenOption.*;
 
 public class Writer {
@@ -117,10 +119,15 @@ public class Writer {
        String string="Я использую java.НИО.каналы.FileChannel, чтобы открыть файл и заблокировать его, а затем записать InputStream в выходной файл.\n" +
                "InputStream может быть открыт другим файлом, URL, сокетом или чем угодно.\n Я написал следующие коды:" +
                "";
-       byte[] bytesString=string.getBytes();
+        byte[] bytesString= new byte[0];
+        try {
+            bytesString = string.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         try (RandomAccessFile raf=new RandomAccessFile(fileOut,"rw");
         FileChannel fc=raf.getChannel();){
-            ByteBuffer bb=ByteBuffer.wrap(bytesString,0,bytesString.length);
+            ByteBuffer bb= wrap(bytesString,0,bytesString.length);
             //while (bb.hasRemaining())
                 fc.write(bb);
                 bb.flip();
@@ -132,6 +139,25 @@ public class Writer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    void nioWriteWithRandomAccess(String fileOut) throws UnsupportedEncodingException {
+       Path pathOut = Paths.get(fileOut);
+       /*ByteBuffer bbRead= ByteBuffer.wrap(
+               String.getBytes(" MARKED AREA MARKED AREA MARKED AREA".getBytes('Cp1251'),'Cp866'));*/
+       ByteBuffer bbRead= ByteBuffer.wrap(" MARKED AREA MARKED AREA MARKED AREA".getBytes("UTF-8"));
+       ByteBuffer bbWrite=ByteBuffer.allocate(10);
+       try(FileChannel fc=FileChannel.open(pathOut,READ,WRITE);){
+
+           /*int numBytes=0;
+           while (bbWrite.hasRemaining()&&numBytes!=-1){
+               System.out.println(numBytes);
+               numBytes=fc.read(bbWrite);
+          }*/
+//           fc.position(0);
+           fc.write(bbRead);
+       }catch (IOException e){
+           e.getStackTrace();
+       }
     }
 
 }
