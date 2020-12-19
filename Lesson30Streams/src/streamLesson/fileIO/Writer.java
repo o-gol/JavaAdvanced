@@ -10,6 +10,7 @@ import java.nio.channels.Channel;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -116,19 +117,57 @@ public class Writer {
 
     }
     void nioWriteFromChannel(String fileOut){
-       String string="Я использую java.НИО.каналы.FileChannel, чтобы открыть файл и заблокировать его, а затем записать InputStream в выходной файл.\n" +
-               "InputStream может быть открыт другим файлом, URL, сокетом или чем угодно.\n Я написал следующие коды:" +
-               "";
-        byte[] bytesString= new byte[0];
+//       String string="Я использую java.НИО.каналы.FileChannel, чтобы открыть файл и заблокировать его, а затем записать InputStream в выходной файл.\n" +
+//               "InputStream может быть открыт другим файлом, URL, сокетом или чем угодно.\n Я написал следующие коды: MARKED AREA MARKED AREA MARKED AREA";
+//        String string= null;
+//        try {
+//            string = new String(string.getBytes("windows-1251"),"UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(string);
+
+
+        String string="Как минимум несколько вакцин от коронавируса готовы к распространению, еще сотни находятся в разработке и проходят испытания. " +
+                "Следующим этапом, который может оказаться весьма сложным, станет доставка препаратов. Дело в том, что предлагаемые вакцины требуют особых условий " +
+                "хранения — и в данном случае «особые» не значит «при температуре в диапазоне от −10 до +40 и влажности не более 80%».\n" +
+                "\n" +
+                "Казалось бы, вакцина готова, все самое сложное позади. Однако некоторые специалисты называют грядущий процесс «логистическим кошмаром». " +
+                "Или, если не так драматизировать, чрезвычайно сложной процедурой. Почему?\n" +
+                "\n" +
+                "Вакцина от компании Pfizer и BioNTech должна храниться при температуре минус 70—80 градусов; от Moderna и Национальных институтов\n"+
+                " MARKED AREA MARKED AREA MARKED AREA П р";
+        String stringEx=" MARKED AREA MARKED AREA MARKED AREA П р";
         try {
-            bytesString = string.getBytes("UTF-8");
+//            string= new String(string.getBytes("windows-1251"),"UTF-8");
+            string=new String(string.getBytes("UTF-8"),"UTF-8");
+            stringEx=new String(stringEx.getBytes("windows-1251"),"UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+
+//       String string=new String(badString.getBytes("windows-1251"));
+//        System.out.println(badString);
+        System.out.println(string);
+        System.out.println(stringEx);
+
+
+
+
+        byte[] bytesString = null;
+        bytesString = string.getBytes();
+        /*try {
+            bytesString = string.getBytes("windows-1251");
+//                    bytesString = string.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }*/
+//        System.out.println(string);
         try (RandomAccessFile raf=new RandomAccessFile(fileOut,"rw");
         FileChannel fc=raf.getChannel();){
             ByteBuffer bb= wrap(bytesString,0,bytesString.length);
-            //while (bb.hasRemaining())
+            while (bb.hasRemaining())
                 fc.write(bb);
                 bb.flip();
 
@@ -140,19 +179,63 @@ public class Writer {
             e.printStackTrace();
         }
     }
-    void nioWriteWithRandomAccess(String fileOut) throws UnsupportedEncodingException {
+
+
+
+
+
+
+    void nioWriteWithRandomAccess(String fileOut)  {
        Path pathOut = Paths.get(fileOut);
        /*ByteBuffer bbRead= ByteBuffer.wrap(
                String.getBytes(" MARKED AREA MARKED AREA MARKED AREA".getBytes('Cp1251'),'Cp866'));*/
-       ByteBuffer bbRead= ByteBuffer.wrap(" MARKED AREA MARKED AREA MARKED AREA".getBytes("UTF-8"));
+//       String badString=" MARKED AREA MARKED AREA MARKED AREA П р";
+       String string=" MARKED AREA MARKED AREA MARKED AREA П р";
+        try {
+//            string=new String(string.getBytes("windows-1251"),"UTF-8");
+            string=new String(string.getBytes("UTF-8"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+//       String string=new String(badString.getBytes("windows-1251"));
+//        System.out.println(badString);
+        System.out.println(string);
+//        String string=badString;
+//       byte[] b=string.getBytes("windows-1251");
+//       byte[] b=string.getBytes(StandardCharsets.UTF_8);
+//       byte[] b=string.getBytes("UTF-8");
+       byte[] b=string.getBytes();
+//       ByteBuffer bbRead= ByteBuffer.wrap(b,0,b.length);
+       ByteBuffer bbRead= ByteBuffer.wrap(b);
        ByteBuffer bbWrite=ByteBuffer.allocate(10);
+       //--------------------------------------
+
+        /*try (RandomAccessFile raf=new RandomAccessFile(fileOut,"rw");
+             FileChannel fc=raf.getChannel();
+             ){
+            //ByteBuffer bb= wrap(bytesString,0,bytesString.length);
+            while (bbRead.hasRemaining())
+            fc.write(bbRead);
+            bbRead.flip();
+
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+       //--------------------------------------
+
+
+
        try(FileChannel fc=FileChannel.open(pathOut,READ,WRITE);){
 
-           /*int numBytes=0;
-           while (bbWrite.hasRemaining()&&numBytes!=-1){
-               System.out.println(numBytes);
-               numBytes=fc.read(bbWrite);
-          }*/
+//           int numBytes=0;
+//           while (bbWrite.hasRemaining()&&numBytes!=-1){
+//               System.out.println(numBytes);
+//               numBytes=fc.read(bbWrite);
+//          }
 //           fc.position(0);
            fc.write(bbRead);
        }catch (IOException e){
