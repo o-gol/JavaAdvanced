@@ -135,12 +135,13 @@ public class Writer {
                 "Казалось бы, вакцина готова, все самое сложное позади. Однако некоторые специалисты называют грядущий процесс «логистическим кошмаром». " +
                 "Или, если не так драматизировать, чрезвычайно сложной процедурой. Почему?\n" +
                 "\n" +
-                "Вакцина от компании Pfizer и BioNTech должна храниться при температуре минус 70—80 градусов; от Moderna и Национальных институтов\n"+
-                " MARKED AREA MARKED AREA MARKED AREA П р";
+                "Вакцина от компании Pfizer и BioNTech должна храниться при температуре минус 70—80 градусов; от Moderna и Национальных институтов\n"
+ //               +" MARKED AREA MARKED AREA MARKED AREA П р"
+                               ;
         String stringEx=" MARKED AREA MARKED AREA MARKED AREA П р";
         try {
-//            string= new String(string.getBytes("windows-1251"),"UTF-8");
-            string=new String(string.getBytes("UTF-8"),"UTF-8");
+            string= new String(string.getBytes("windows-1251"),"UTF-8");
+//            string=new String(string.getBytes("UTF-8"),"UTF-8");
             stringEx=new String(stringEx.getBytes("windows-1251"),"UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -192,8 +193,8 @@ public class Writer {
 //       String badString=" MARKED AREA MARKED AREA MARKED AREA П р";
        String string=" MARKED AREA MARKED AREA MARKED AREA П р";
         try {
-//            string=new String(string.getBytes("windows-1251"),"UTF-8");
-            string=new String(string.getBytes("UTF-8"),"UTF-8");
+            string=new String(string.getBytes("windows-1251"),"UTF-8");
+//            string=new String(string.getBytes("UTF-8"),"UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
