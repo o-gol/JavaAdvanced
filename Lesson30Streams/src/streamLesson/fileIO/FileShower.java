@@ -3,11 +3,19 @@ package streamLesson.fileIO;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
+import java.util.Set;
 
 public class FileShower {
     File file;
+
     public FileShower(String path) {
         this.file=new File(path);
+    }
+
+    public FileShower() {
     }
 
     public void showAll() throws IOException {
@@ -102,6 +110,15 @@ public class FileShower {
 
 
 
+    }
+
+
+    void processDir(String pathDir){
+        try {
+            Files.createDirectory(Paths.get(pathDir));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

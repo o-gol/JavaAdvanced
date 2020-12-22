@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
@@ -73,6 +74,8 @@ public class Writer {
         }
         System.out.printf("Info was write in file %s\n", fileIn);
     }
+
+
     void nioWriteFromBuffer(String fileIn,String fileOut) throws IOException {
        Path pathIn=Paths.get(fileIn);
        Path pathOut=Paths.get(fileOut);
@@ -116,7 +119,8 @@ public class Writer {
 
 
     }
-    void nioWriteFromChannel(String fileOut){
+
+    /*void nioWriteFromChannel(String fileOut){
 //       String string="Я использую java.НИО.каналы.FileChannel, чтобы открыть файл и заблокировать его, а затем записать InputStream в выходной файл.\n" +
 //               "InputStream может быть открыт другим файлом, URL, сокетом или чем угодно.\n Я написал следующие коды: MARKED AREA MARKED AREA MARKED AREA";
 //        String string= null;
@@ -135,8 +139,9 @@ public class Writer {
                 "Казалось бы, вакцина готова, все самое сложное позади. Однако некоторые специалисты называют грядущий процесс «логистическим кошмаром». " +
                 "Или, если не так драматизировать, чрезвычайно сложной процедурой. Почему?\n" +
                 "\n" +
-                "Вакцина от компании Pfizer и BioNTech должна храниться при температуре минус 70—80 градусов; от Moderna и Национальных институтов\n"+
-                " MARKED AREA MARKED AREA MARKED AREA П р";
+                "Вакцина от компании Pfizer и BioNTech должна храниться при температуре минус 70—80 градусов; от Moderna и Национальных институтов\n"
+ //               +" MARKED AREA MARKED AREA MARKED AREA П р"
+                               ;
         String stringEx=" MARKED AREA MARKED AREA MARKED AREA П р";
         try {
             string= new String(string.getBytes("windows-1251"),"UTF-8");
@@ -147,11 +152,11 @@ public class Writer {
         }
 
 
-        /*try {
+        *//*try {
             string=new String(string.getBytes("windows-1251"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }*/
+        }*//*
 //        System.out.println(badString);
         System.out.println(string);
         System.out.println(stringEx);
@@ -185,28 +190,28 @@ public class Writer {
 
 
 
-    }
+    }*/
 
 
 
 
-
-
+    /*
     void nioWriteWithRandomAccess(String fileOut)  {
        Path pathOut = Paths.get(fileOut);
-       /*ByteBuffer bbRead= ByteBuffer.wrap(
-               String.getBytes(" MARKED AREA MARKED AREA MARKED AREA".getBytes('Cp1251'),'Cp866'));*/
+//       ByteBuffer bbRead= ByteBuffer.wrap(
+//               String.getBytes(" MARKED AREA MARKED AREA MARKED AREA".getBytes('Cp1251'),'Cp866'));
 //       String badString=" MARKED AREA MARKED AREA MARKED AREA П р";
        String string=" MARKED AREA MARKED AREA MARKED AREA П р";
         try {
+
 //            string=new String(string.getBytes("windows-1251"),"UTF-8");
-            string=new String(string.getBytes("windows-1251"),"UTF-8");
 //            string=new String(string.getBytes("UTF-8"),"UTF-8");
+            string=new String(string.getBytes("windows-1251"),"UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 //       String string=new String(badString.getBytes("windows-1251"));
-//        System.out.println(badString);
+//       System.out.println(badString);
         System.out.println(string);
 //        String string=badString;
 //       byte[] b=string.getBytes("windows-1251");
@@ -235,26 +240,68 @@ public class Writer {
         }
        //--------------------------------------
 
-
-
-       /*try(FileChannel fc=FileChannel.open(pathOut,READ,WRITE);){
-
-//           int numBytes=0;
-//           while (bbWrite.hasRemaining()&&numBytes!=-1){
-//               System.out.println(numBytes);
-//               numBytes=fc.read(bbWrite);
-//          }
-//           fc.position(0);
-           fc.write(bbRead);
-       }catch (IOException e){
-           e.getStackTrace();
-       }*/
-
+//       try(FileChannel fc=FileChannel.open(pathOut,READ,WRITE);){
+//
+////           int numBytes=0;
+////           while (bbWrite.hasRemaining()&&numBytes!=-1){
+////               System.out.println(numBytes);
+////               numBytes=fc.read(bbWrite);
+////          }
+////           fc.position(0);
+//           fc.write(bbRead);
+//       }catch (IOException e){
+//           e.getStackTrace();
+//       }
 
 
 
+
+
+
+    }*/
+
+
+    void writeWithChanel(String fileName){
+
+        try(FileChannel fc=new RandomAccessFile(fileName,"rw").getChannel();)
+        {
+            ByteBuffer bbWrite=ByteBuffer.wrap(("However, if you will be writing to the same file many\n" +
+                    " times, the above has to open and close the file on the disk many times, which\n" +
+                    " is a slow operation. In this case, a buffered writer is better:\n").getBytes());
+            fc.write(bbWrite);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    void writeWithRandomAccess (String fileName){
+        String string="MARKED AREA MARKED AREA";
+        try (FileChannel fc=FileChannel.open(Paths.get(fileName),READ,WRITE);)
+        {
+            ByteBuffer bbWrite=ByteBuffer.wrap(string.getBytes());
+            ByteBuffer bbRead=ByteBuffer.allocate(string.getBytes().length);
+            int numBytes=fc.read(bbRead);
+            System.out.println(Arrays.toString(bbRead.array()));
+            System.out.println(new String(bbRead.array()));
+            fc.position(10);
+            fc.write(bbWrite);
+            long size=fc.size();
+            fc.position(size/2);
+            bbRead.rewind();
+            fc.write(bbRead);
+            fc.position(size);
+            bbWrite.rewind();
+            fc.write(bbWrite);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
+
 
 }

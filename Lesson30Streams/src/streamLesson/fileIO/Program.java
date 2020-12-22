@@ -20,6 +20,7 @@ public class Program {
     private static final String FILE_OUT_NAME_MATHER = "Lesson30Streams\\src\\streamLesson\\files\\Accounts Book Mather.txt";
     private static final String FILE_BANK_ACCOUNTS = "Lesson30Streams\\src\\streamLesson\\files\\Bank Accounts.txt";
     private static final String FILE_CHANEL_WR = "Lesson30Streams\\src\\streamLesson\\files\\Chanels File Write Read.txt";
+    private static final String DIR_TEMP = "Lesson30Streams\\src\\streamLesson\\files\\temp";
 
     public static void main(String[] args) throws IOException {
 
@@ -44,6 +45,7 @@ public class Program {
         double t2=System.currentTimeMillis();
         System.out.println(t2-t1);
         FileShower fileShower=new FileShower("Lesson30Streams\\src\\streamLesson\\files\\Lesson1.bit");
+        FileShower dirShower=new FileShower();
         fileShower.showAll();
 //        File file=new File("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
 //        fileShower.showNioAll("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
@@ -55,8 +57,15 @@ public class Program {
 //        reader.nioReadFileFromStream(FILE_IN_NAME);
 //        writer.nioWriteFromStream(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
 //        reader.nioReadFromChannel(FILE_IN_NAME);
-        writer.nioWriteFromChannel(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
+//        writer.nioWriteFromChannel(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
+
 //        writer.nioWriteWithRandomAccess(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
+
+//        writer.nioWriteWithRandomAccess(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER2);
+//        writer.writeWithChanel(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
+//        writer.writeWithRandomAccess(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
+        dirShower.processDir(DIR_TEMP);
+
     }
 
 
