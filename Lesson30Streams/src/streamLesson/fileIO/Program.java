@@ -56,7 +56,7 @@ public class Program {
 //        writer.nioWriteFromStream(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
 //        reader.nioReadFromChannel(FILE_IN_NAME);
         writer.nioWriteFromChannel(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
-        writer.nioWriteWithRandomAccess(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
+//        writer.nioWriteWithRandomAccess(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
     }
 
 

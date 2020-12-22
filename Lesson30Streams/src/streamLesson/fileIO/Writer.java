@@ -139,15 +139,19 @@ public class Writer {
                 " MARKED AREA MARKED AREA MARKED AREA П р";
         String stringEx=" MARKED AREA MARKED AREA MARKED AREA П р";
         try {
-//            string= new String(string.getBytes("windows-1251"),"UTF-8");
-            string=new String(string.getBytes("UTF-8"),"UTF-8");
+            string= new String(string.getBytes("windows-1251"),"UTF-8");
+//            string=new String(string.getBytes("UTF-8"),"UTF-8");
             stringEx=new String(stringEx.getBytes("windows-1251"),"UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
 
-//       String string=new String(badString.getBytes("windows-1251"));
+        /*try {
+            string=new String(string.getBytes("windows-1251"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }*/
 //        System.out.println(badString);
         System.out.println(string);
         System.out.println(stringEx);
@@ -155,21 +159,14 @@ public class Writer {
 
 
 
-        byte[] bytesString = null;
-        bytesString = string.getBytes();
-        /*try {
-            bytesString = string.getBytes("windows-1251");
-//                    bytesString = string.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }*/
+
 //        System.out.println(string);
         try (RandomAccessFile raf=new RandomAccessFile(fileOut,"rw");
         FileChannel fc=raf.getChannel();){
-            ByteBuffer bb= wrap(bytesString,0,bytesString.length);
-            while (bb.hasRemaining())
+            ByteBuffer bb= wrap(string.getBytes(),0,string.getBytes().length);
+//            while (bb.hasRemaining())
                 fc.write(bb);
-                bb.flip();
+//                bb.flip();
 
 
 
@@ -178,6 +175,16 @@ public class Writer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
+
+
+
+
+
+
+
     }
 
 
@@ -193,7 +200,8 @@ public class Writer {
        String string=" MARKED AREA MARKED AREA MARKED AREA П р";
         try {
 //            string=new String(string.getBytes("windows-1251"),"UTF-8");
-            string=new String(string.getBytes("UTF-8"),"UTF-8");
+            string=new String(string.getBytes("windows-1251"),"UTF-8");
+//            string=new String(string.getBytes("UTF-8"),"UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -210,7 +218,7 @@ public class Writer {
        ByteBuffer bbWrite=ByteBuffer.allocate(10);
        //--------------------------------------
 
-        /*try (RandomAccessFile raf=new RandomAccessFile(fileOut,"rw");
+        try (RandomAccessFile raf=new RandomAccessFile(fileOut,"rw");
              FileChannel fc=raf.getChannel();
              ){
             //ByteBuffer bb= wrap(bytesString,0,bytesString.length);
@@ -224,12 +232,12 @@ public class Writer {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
        //--------------------------------------
 
 
 
-       try(FileChannel fc=FileChannel.open(pathOut,READ,WRITE);){
+       /*try(FileChannel fc=FileChannel.open(pathOut,READ,WRITE);){
 
 //           int numBytes=0;
 //           while (bbWrite.hasRemaining()&&numBytes!=-1){
@@ -240,7 +248,13 @@ public class Writer {
            fc.write(bbRead);
        }catch (IOException e){
            e.getStackTrace();
-       }
+       }*/
+
+
+
+
+
+
     }
 
 }
