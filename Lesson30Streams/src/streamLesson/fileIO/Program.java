@@ -47,10 +47,10 @@ public class Program {
         FileShower fileShower=new FileShower("Lesson30Streams\\src\\streamLesson\\files\\Lesson1.bit");
         FileShower dirShower=new FileShower();
         fileShower.showAll();
-//        File file=new File("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
-//        fileShower.showNioAll("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
-//        fileShower.showNioAll("Lesson30Streams\\src\\streamLesson\\files\\files");
-//        fileShower.showNioAll(FILE_IN_NAME);
+        File file=new File("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
+        fileShower.showNioAll("Lesson30Streams\\src\\streamLesson\\files\\Lesson2.bit");
+        fileShower.showNioAll("Lesson30Streams\\src\\streamLesson\\files\\files");
+        fileShower.showNioAll(FILE_IN_NAME);
 //        reader.readFileFull(FILE_IN_NAME);
 //        reader.nioReadFileFromBuffer(FILE_IN_NAME);
 //        writer.nioWriteFromBuffer(FILE_IN_NAME,FILE_OUT_NAME_NIO_BUFFER);
