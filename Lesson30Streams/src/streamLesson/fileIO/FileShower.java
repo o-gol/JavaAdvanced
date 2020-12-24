@@ -3,14 +3,18 @@ package streamLesson.fileIO;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-import java.nio.file.attribute.FileAttribute;
-import java.nio.file.attribute.PosixFilePermission;
-import java.nio.file.attribute.PosixFilePermissions;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class FileShower {
+
+    static List<Path> pathAll = new ArrayList<>();
+    private Path p;
+    private DirectoryStream.Filter filters;
+
+    public static List<Path> getPathAll() {
+        return pathAll;
+    }
+
     File file;
 
     public FileShower(String path) {
@@ -111,13 +115,14 @@ public class FileShower {
 
     }
 
-    private void recursFindDir(Path p) {
+    private List<Path> recursFindDir(Path p) {
         try (DirectoryStream<Path> pathsAll = Files.newDirectoryStream(p);) {
 
             for (Path pp :
                     pathsAll) {
-                    System.out.println(pp);
-                if(new File(pp.toString()).isDirectory()){
+//                    System.out.println(pp);
+                pathAll.add(pp);
+                if (new File(pp.toString()).isDirectory()) {
                     recursFindDir(pp);
                 }
 
@@ -128,6 +133,62 @@ public class FileShower {
             e.printStackTrace();
         }
 
+//        System.out.println("====================================1");
+        return pathAll;
+
+    }
+
+    private void recursFindFiles(Path path, String string) {
+        pathAll.clear();
+        List<Path> paths = recursFindDir(path);
+        System.out.println("===========END================");
+        recursFindDir(path, string);
+        for (Path p :
+                paths) {
+            if (new File(p.toString()).isDirectory())
+                recursFindDir(p, string);
+        }
+    }
+
+    private static void recursFindDir(Path p, String glob) {
+        try (DirectoryStream<Path> pathsAll = Files.newDirectoryStream(p, glob);) {
+
+            for (Path pp :
+                    pathsAll) {
+                System.out.println(pp);
+                if (new File(pp.toString()).isDirectory()) {
+                    recursFindDir(pp, glob);
+                }
+
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("====================================2");
+
+    }
+
+    private void recursFindDir(Path p, DirectoryStream.Filter<Path> filters) {
+
+        try (DirectoryStream<Path> pathsAll = Files.newDirectoryStream(p, filters);) {
+            for (Path pp :
+                    pathsAll) {
+                System.out.println(pp);
+//                if (new File(pp.toString()).isDirectory()) {
+                System.out.println("====================================3");
+                recursFindDir(pp, filters);
+//                }
+
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     void processDir(String path) {
@@ -136,21 +197,17 @@ public class FileShower {
         System.out.println(pathsDir + "\n" + pathDir);
         boolean flag = true;
 
-
-
         /*Set<PosixFilePermission> setAtributs=new HashSet<PosixFilePermission>();
         setAtributs.add(PosixFilePermission.GROUP_READ);
         setAtributs.add(PosixFilePermission.GROUP_WRITE);*/
 
-
         try
-                //(DirectoryStream<Path> pathsAll = Files.newDirectoryStream(pathDir))
+        //(DirectoryStream<Path> pathsAll = Files.newDirectoryStream(pathDir))
         {
             if (Files.notExists(pathDir))
                 Files.createDirectory(pathDir);
             else if (Files.notExists(pathsDir))
                 Files.createDirectories(pathsDir);
-
 
             if (!Files.notExists(pathsDir)) {
                 File folder = new File(pathsDir.toString());
@@ -179,10 +236,14 @@ public class FileShower {
                 System.out.println(p);
             }
 
-            recursFindDir(pathDir);
+//            recursFindDir(pathDir,"*.{txt}");
+//            pathAll.clear();
+//            recursFindDir(pathDir);
 
 
-
+            recursFindFiles(pathDir, "*.{txt,bin}");
+            System.out.println("=================END================");
+            recursFindDir(pathDir, (path1) -> (Files.isDirectory(path1)));
 
         } catch (IOException e) {
             e.printStackTrace();
