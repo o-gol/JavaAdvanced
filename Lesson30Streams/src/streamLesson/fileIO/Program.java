@@ -65,7 +65,8 @@ public class Program {
 //        writer.nioWriteWithRandomAccess(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER2);
 //        writer.writeWithChanel(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
 //        writer.writeWithRandomAccess(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
-        dirShower.processDir(DIR_TEMP);
+//        dirShower.processDir(DIR_TEMP);
+        FileAttribute.showAttribute(Paths.get(DIR_TEMP));
 
 
     }
