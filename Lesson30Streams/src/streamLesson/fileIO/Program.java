@@ -6,8 +6,10 @@ import streamLesson.tableOfStudent.SubjectGrade;
 
 import java.io.*;
 import java.nio.channels.Channel;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
 
@@ -22,6 +24,7 @@ public class Program {
     private static final String FILE_BANK_ACCOUNTS = "Lesson30Streams\\src\\streamLesson\\files\\Bank Accounts.txt";
     private static final String FILE_CHANEL_WR = "Lesson30Streams\\src\\streamLesson\\files\\Chanels File Write Read.txt";
     private static final String DIR_TEMP = "Lesson30Streams\\src\\streamLesson\\files\\temp";
+    private static final String DIR_TEMP_FILE = "Lesson30Streams\\src\\streamLesson\\files\\temp\\a\\Example buffer Grade Book.txt";
 
     public static void main(String[] args) throws IOException {
 
@@ -66,7 +69,11 @@ public class Program {
 //        writer.writeWithChanel(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
 //        writer.writeWithRandomAccess(FILE_IN_NAME_EXAMPLE_FOR_WRITE_READ_FROM_BUFFER);
 //        dirShower.processDir(DIR_TEMP);
-        FileAttribute.showAttribute(Paths.get(DIR_TEMP));
+//        FileAttribute.showAttribute(Paths.get(DIR_TEMP));
+        System.out.println("==================VISITOR====================");
+//        FileTreeVisitor.Visitor visitor=new FileTreeVisitor.Visitor();
+//        visitor.visitFile(Paths.get(DIR_TEMP_FILE), Files.readAttributes(Paths.get(DIR_TEMP_FILE), BasicFileAttributes.class));
+        Files.walkFileTree(Paths.get(DIR_TEMP),new FileTreeVisitor.Visitor());
 
 
     }
