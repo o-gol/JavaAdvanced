@@ -1,0 +1,32 @@
+============================================
+
+AverageStudentGrade{studentName='Jessica', averageGrade=79.25}
+
+SubjectGrade{subject='Leterat', grade=78.0, super=streamLesson.tableOfStudent.SubjectGrade@254989ff}
+SubjectGrade{subject='Mathema', grade=80.0, super=streamLesson.tableOfStudent.SubjectGrade@377dca04}
+SubjectGrade{subject='Phisic', grade=80.0, super=streamLesson.tableOfStudent.SubjectGrade@728938a9}
+SubjectGrade{subject='Sport', grade=79.0, super=streamLesson.tableOfStudent.SubjectGrade@21b8d17c}
+============================================
+
+AverageStudentGrade{studentName='Tania', averageGrade=79.25}
+
+SubjectGrade{subject='Leterat', grade=88.0, super=streamLesson.tableOfStudent.SubjectGrade@6433a2}
+SubjectGrade{subject='Mathema', grade=78.0, super=streamLesson.tableOfStudent.SubjectGrade@5910e440}
+SubjectGrade{subject='Phisic', grade=76.0, super=streamLesson.tableOfStudent.SubjectGrade@6267c3bb}
+SubjectGrade{subject='Sport', grade=75.0, super=streamLesson.tableOfStudent.SubjectGrade@533ddba}
+============================================
+
+AverageStudentGrade{studentName='John', averageGrade=70.25}
+
+SubjectGrade{subject='Leterat', grade=66.0, super=streamLesson.tableOfStudent.SubjectGrade@246b179d}
+SubjectGrade{subject='Mathema', grade=78.0, super=streamLesson.tableOfStudent.SubjectGrade@7a07c5b4}
+SubjectGrade{subject='Phisic', grade=90.0, super=streamLesson.tableOfStudent.SubjectGrade@26a1ab54}
+SubjectGrade{subject='Sport', grade=47.0, super=streamLesson.tableOfStudent.SubjectGrade@3d646c37}
+============================================
+
+AverageStudentGrade{studentName='Alex', averageGrade=64.75}
+
+SubjectGrade{subject='Leterat', grade=56.0, super=streamLesson.tableOfStudent.SubjectGrade@41cf53f9}
+SubjectGrade{subject='Mathema', grade=67.0, super=streamLesson.tableOfStudent.SubjectGrade@5a10411}
+SubjectGrade{subject='Phisic', grade=78.0, super=streamLesson.tableOfStudent.SubjectGrade@2ef1e4fa}
+SubjectGrade{subject='Sport', grade=58.0, super=streamLesson.tableOfStudent.SubjectGrade@306a30c7}

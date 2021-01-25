@@ -23,7 +23,9 @@ public class Program {
     private static final String FILE_OUT_NAME_MATHER = "Lesson30Streams\\src\\streamLesson\\files\\Accounts Book Mather.txt";
     private static final String FILE_BANK_ACCOUNTS = "Lesson30Streams\\src\\streamLesson\\files\\Bank Accounts.txt";
     private static final String FILE_CHANEL_WR = "Lesson30Streams\\src\\streamLesson\\files\\Chanels File Write Read.txt";
-    private static final String DIR_TEMP = "Lesson30Streams\\src\\streamLesson\\files\\temp";
+    public static final String DIR_TEMP = "Lesson30Streams\\src\\streamLesson\\files\\temp";
+    public static final String DIR_TEMP_COPY = "Lesson30Streams\\src\\streamLesson\\files\\tempCopy";
+    private static final String DIR_TEMP_DATA = "Lesson30Streams\\src\\streamLesson\\files\\2021.01.15_temp";
     private static final String DIR_TEMP_FILE = "Lesson30Streams\\src\\streamLesson\\files\\temp\\a\\Example buffer Grade Book.txt";
 
     public static void main(String[] args) throws IOException {
@@ -73,13 +75,14 @@ public class Program {
         System.out.println("==================VISITOR====================");
 //        FileTreeVisitor.Visitor visitor=new FileTreeVisitor.Visitor();
 //        visitor.visitFile(Paths.get(DIR_TEMP_FILE), Files.readAttributes(Paths.get(DIR_TEMP_FILE), BasicFileAttributes.class));
-        Files.walkFileTree(Paths.get(DIR_TEMP),new FileTreeVisitor.Visitor());
+//        Files.walkFileTree(Paths.get(DIR_TEMP),new FileTreeVisitor.Visitor());
+//        Files.walkFileTree(Paths.get(DIR_TEMP_DATA),new FileTreeVisitor.Visitor());
+        System.out.println("==================VISITOR_COPY====================");
+        Files.walkFileTree(Paths.get(DIR_TEMP),new FileTreeVisitor.CopyVisitor(Paths.get(DIR_TEMP_COPY)));
+
 
 
     }
-
-
-
 
 
 
