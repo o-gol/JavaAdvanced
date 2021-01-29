@@ -3,15 +3,31 @@ import java.util.function.*;
 
 @FunctionalInterface
 interface ElementProcess<T extends Number> {
-    public double process(T element);
+     double process(T element);
 }
 @FunctionalInterface
 interface ElementFunc{
-    public void func();
+     void func();
+
+
+    static void countTime(ElementFunc elementFunc){
+        long start = System.currentTimeMillis();
+        elementFunc.func();
+        long finish = System.currentTimeMillis();
+        System.out.println(finish-start);
+    }
+
+    default ElementFunc countSomeTime(ElementFunc elementFunc){
+        return ()->{
+            this.func();
+            elementFunc.func();
+        };
+
+    }
+
 }
 
 public class Program {
-    private static List elements;
 
     public static void main(String[] args) {
         List<Integer> integerList = new ArrayList<>();
@@ -31,9 +47,11 @@ public class Program {
         processElement(integerList, i ->Math.sin(i.doubleValue()));
         System.out.println("---------------------");
         processElement(doubleList, i -> Math.sin(i.doubleValue()));
-        countTime(()->Arrays.sort(generateIntArr()));
+        ElementFunc.countTime(()->Arrays.sort(generateIntArr()));
+        ElementFunc elementFunc = () -> Arrays.sort(generateIntArr());
+        ElementFunc.countTime(elementFunc.countSomeTime(() -> Arrays.sort(generateIntArr())));
         String hello="Hello";
-        Double doubNum=0.123;
+//        Double doubNum=0.123;
         String alex=" Alex";
         TransformUtils<Double> transDouble=new TransformUtils<>();
         System.out.println(transDouble.transform(0.123, Math::sin));
@@ -99,7 +117,7 @@ public class Program {
 
         System.out.println(combineMax(employees, e -> e, (o1, o2) -> o1.getSalary().compareTo(o2.getSalary())));
 
-        System.out.println(combineMax(employees, e -> e, Comparator.comparing(e->e.getSalary())));
+        System.out.println(combineMax(employees, e -> e, Comparator.comparing(Employee::getSalary)));
 
         System.out.println(combine(persons, e -> e, new BinaryOperator<Person>() {
                     @Override
@@ -111,12 +129,12 @@ public class Program {
     }));
 
 
-        System.out.println(combineMax(persons, e -> e, Comparator.comparing(e->e.getAge())));
+        System.out.println(combineMax(persons, e -> e, Comparator.comparing(Person::getAge)));
 
         System.out.println("----------------Consumer-------------------------");
 
         employees.forEach(employee -> employee.setSalary(employee.getSalary()*11/10));
-        employees.forEach(employee -> System.out.println(employee));
+        employees.forEach(System.out::println);
 
         System.out.println("----------------Supplier-------------------------");
         Supplier[] suppliers={Circle::new,Square::new,Rectangle::new};
@@ -130,13 +148,17 @@ public class Program {
         }
 
 
+        Circle circle= new Circle();
+        System.out.println(circle.calcSomething());
+
+
 
     }
 
 
 
 
-    static <T,R extends Number> Integer calcSum(List<T> elements, Function<T,R> function){
+    private static <T,R extends Number> Integer calcSum(List<T> elements, Function<T, R> function){
         int sum=0;
         for (T element :
                 elements)
@@ -144,7 +166,7 @@ public class Program {
         return sum;
     }
 
-    static <T> T combine(List<T> elements, Function<T,T> function, BinaryOperator<T> binaryOperator){
+    private static <T> T combine(List<T> elements, Function<T, T> function, BinaryOperator<T> binaryOperator){
         T zeroElement=elements.get(0);
         for (T element :
                 elements)
@@ -152,17 +174,17 @@ public class Program {
         return zeroElement;
     }
 
-    static <T> T combineMax(List<T> elements, Function<T,T> function, Comparator<T> comparator){
+    private static <T> T combineMax(List<T> elements, Function<T, T> function, Comparator<T> comparator){
         T zeroElement=elements.get(0);
         for (T element :
                 elements) {
             int compare = comparator.compare(zeroElement, function.apply(element));
-            zeroElement=(compare==-1)?function.apply(element):((compare==1)?zeroElement:zeroElement);
+            zeroElement=(compare < 0)?function.apply(element):((compare > 0)?zeroElement:zeroElement);
         }
         return zeroElement;
     }
 
-    static <T> T findMath(List<T> elements, Predicate<T> predict){
+    private static <T> T findMath(List<T> elements, Predicate<T> predict){
 
         for (T element:
              elements) {
@@ -173,7 +195,7 @@ public class Program {
 
     }
 
-    static <T extends Number> void processElement(List<T> list, ElementProcess elementProcess) {
+    private static <T extends Number> void processElement(List<T> list, ElementProcess<T> elementProcess) {
         List<Double> doubleList=new ArrayList<>();
         for (T t :
                 list) {
@@ -193,12 +215,7 @@ public class Program {
         return arr;
     }
 
-    static void countTime(ElementFunc elementFunc){
-        long start = System.currentTimeMillis();
-        elementFunc.func();
-        long finish = System.currentTimeMillis();
-        System.out.println(finish-start);
-    }
+
 
 
 }

@@ -1,5 +1,11 @@
-public class Square extends Shape {
-    public Square() {
-        System.out.println("Create Square");
+public class Square  implements Shape {
+    Square() {
+        System.out.println("Create Circle");
     }
+
+    @Override
+    public double calcSquare() {
+        return 3;
+    }
+
 }
