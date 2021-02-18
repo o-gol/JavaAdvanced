@@ -18,7 +18,8 @@ public class RichPerson {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", surname=" + surname + '\'' +
-                ", salary=" + age +
+                ", salary=" + salary +
+                ", age=" + age +
                 '}';
     }
 

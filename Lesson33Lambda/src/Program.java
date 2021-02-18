@@ -46,7 +46,7 @@ public class Program {
 
         processElement(integerList, i ->Math.sin(i.doubleValue()));
         System.out.println("---------------------");
-        processElement(doubleList, i -> Math.sin(i.doubleValue()));
+        processElement(doubleList, Math::sin);
         ElementFunc.countTime(()->Arrays.sort(generateIntArr()));
         ElementFunc elementFunc = () -> Arrays.sort(generateIntArr());
         ElementFunc.countTime(elementFunc.countSomeTime(() -> Arrays.sort(generateIntArr())));
@@ -142,10 +142,14 @@ public class Program {
         System.out.println("-----------------------------------------");
         for (int i = 0; i < 4; i++) {
             int netx=new Random().nextInt(3);
-            Supplier supplier=suppliers[netx];
+            suppliers[netx].get();
+//            Supplier supplier=suppliers[netx];
             //System.out.println(netx);
-            supplier.get();
+//            supplier.get();
         }
+        System.out.println("-----------------------------------------");
+
+
 
 
         Circle circle= new Circle();

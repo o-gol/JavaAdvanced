@@ -1,6 +1,6 @@
 public class Square  implements Shape {
     Square() {
-        System.out.println("Create Circle");
+        System.out.println("Create Square");
     }
 
     @Override
