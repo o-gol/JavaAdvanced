@@ -4,8 +4,10 @@ import ru.Colors;
 
 public class Program {
 
-
-    private static volatile int  count;
+    static Object o=new Object();
+    private static
+    volatile
+    int  count;
 
     public static void main(String[] args) {
 
@@ -19,8 +21,7 @@ public class Program {
     static Thread th1=new Thread(()->{
         int local=count;
         for (int i = 0; i < 10; i++) {
-            System.out.println(Colors.CYAN+"Write increment count"+(local+1));
-            count=++local;
+            local = getLocal(local, Colors.CYAN, "Write increment count");
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -33,15 +34,22 @@ public class Program {
         int local=count;
         while (local<10)
         if (local!=count) {
-            System.out.println(Colors.RED+"Read increment count"+(local+1));
-            count=++local;
-            /*try {
+            local = getLocal(local, Colors.RED, "Read increment count");
+            try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }*/
+            }
         }
     });
+
+    private static  int getLocal(int local, Colors red, String s) {
+        synchronized (o) {
+            System.out.println(red + s + (local + 1));
+            count = ++local;
+            return local;
+        }
+    }
 
 
 }
