@@ -36,7 +36,7 @@ public class Program {
                     "DONE"
             };
     static String[] list=new String[5];
-    static int count=0;
+    static volatile int count=0;
     static boolean end=true;
     static final Object o=new Object();
 
@@ -70,7 +70,8 @@ public class Program {
                 }
             }
         }).start();*/
-        prodConsumer();
+//        prodConsumer();
+        prodConsumerCount();
 
 
 
@@ -81,6 +82,21 @@ public class Program {
     }
 
 
+
+    static void prodConsumerCount(){
+
+        Thread produser=new Thread(()->{
+
+            for (int i = 0; i <messages.length ; i++) {
+                count++;
+                System.out.println(count);
+            }
+        });
+        produser.start();
+    }
+
+
+
     static void prodConsumer(){
 
         Thread produser=new Thread(()->{
@@ -88,7 +104,7 @@ public class Program {
             for (int i = 0; i <messages.length ; i++) {
                 synchronized (o) {
 
-                    if(count<0||count>5) {
+                    if(count>5) {
                         try {
                             o.wait();
                         } catch (InterruptedException e) {
@@ -112,8 +128,7 @@ public class Program {
         Thread consumer=new Thread(()->{
                 while (end) {
             synchronized (o) {
-                    count--;
-                    if(count<0||count>5) {
+                    if(count<0) {
                         try {
                             o.wait();
                         } catch (InterruptedException e) {
@@ -122,6 +137,7 @@ public class Program {
                     }
                     if ("DONE".equals(list[count]))
                         end = false;
+                    count--;
                     System.out.printf("%s GET %s -%s\n", Colors.GREEN, list[count], count);
                     list[count] = null;
 
