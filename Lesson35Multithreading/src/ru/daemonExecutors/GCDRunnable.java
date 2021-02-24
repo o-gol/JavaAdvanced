@@ -1,4 +1,4 @@
-package ru.daemon;
+package ru.daemonExecutors;
 
 import ru.Colors;
 
@@ -24,11 +24,11 @@ public class GCDRunnable extends Random implements Runnable {
                 if(!Thread.interrupted()) {
                     int gcd = computeGCD(a, b);
                     if (gcd > 10) {
-                        try {
+                        /*try {
                             Thread.sleep(10);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
-                        }
+                        }*/
                     }
                         System.out.printf("%s in %s %s GCD for %s and %s is %s\n", Colors.GREEN,threadType, threadName, a, b, gcd);
                 }else {
