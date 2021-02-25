@@ -2,53 +2,63 @@ package ru.produserConsumer;
 
 import ru.Colors;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class Program {
-    static BlockingQueue<String> queue=new ArrayBlockingQueue<>(5);
-    static final String[] messages =
+    private static BlockingQueue<String> queue = new ArrayBlockingQueue<>(5);
+    private static final String[] messages =
             {
-                    "What is blue?",
-                    "The sky is blue!",
-                    "What is green?",
-                    "The grass is green!",
-                    "What is yellow?",
-                    "The round sun is yellow!",
-                    "What is orange?",
-                    "The pumpkin is orange!",
-                    "What is brown?",
-                    "Brown is the Earth and the ground!",
-                    "What is red?",
-                    "The butterfly is red!",
-                    "What is pink?",
-                    "The flower is pink!",
-                    "What is purple?",
-                    "The eggplant is purple!",
-                    "What is white?",
-                    "The snow that falls is white!",
-                    "What is black?",
-                    "Black is the sky at night!",
-                    "DONE"
+                    "1 What is blue?",
+                    "2 The sky is blue!",
+                    "3 What is green?",
+                    "4 The grass is green!",
+                    "5 What is yellow?",
+                    "6 The round sun is yellow!",
+                    "7 What is orange?",
+                    "8 The pumpkin is orange!",
+                    "9 What is brown?",
+                    "10 Brown is the Earth and the ground!",
+                    "11 What is red?",
+                    "12 The butterfly is red!",
+                    "13 What is pink?",
+                    "14 The flower is pink!",
+                    "15 What is purple?",
+                    "16 The eggplant is purple!",
+                    "17 What is white?",
+                    "18 The snow that falls is white!",
+                    "19 What is black?",
+                    "20 Black is the sky at night!",
+                    "21 DONE"
             };
-    static String[] list=new String[5];
-    static volatile int count=0;
-    static boolean end=true;
-    static final Object o=new Object();
+    private static String[] listQueue = new String[5];
+    private static String[] listStack = new String[5];
+    private static volatile int countQueue = 0;
+    private static volatile int countStack = 0;
+    private static boolean endPutQueue = true;
+    private static boolean endPutStack = true;
+    private static final Object oQueue = new Object();
+    private static final Object oStack = new Object();
 
 
     public static void main(String[] args) {
 
-        /*new Thread(()->{
-            for (int i = 0; i < messages.length; i++) {
+        prodConsumerBlockingQueue();
+//        prodConsumerStack();
+//        prodConsumerQueue();
+
+
+    }
+
+
+    private static void prodConsumerBlockingQueue() {
+        new Thread(() -> {
+            for (String message : messages) {
                 try {
-                    queue.put(messages[i]);
-                    System.out.printf("%sPUT %s - %s\n", Colors.RED,messages[i],queue.size());
-                    Thread.sleep(new Random().nextInt(1000));
+                    System.out.printf("%sPUT %s - %s\n", Colors.RED, message, queue.size());
+                    queue.put(message);
+                    sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -56,23 +66,79 @@ public class Program {
             }
         }).start();
 
-        new Thread(()->{
-            while (true){
+        new Thread(() -> {
+            while (true) {
 
                 try {
-                    String cons=queue.take();
-                    System.out.printf("%sGET %s - %s\n", Colors.GREEN,cons,queue.size());
-                if("DONE".equals(cons))
-                    return;
-                Thread.sleep(new Random().nextInt(3000));
+                    String cons = queue.take();
+                    System.out.printf("%sGET %s - %s\n", Colors.PURPLE, cons, queue.size());
+                    if (!messages[messages.length - 1].equals(cons))
+                        sleep(1000);
+                    else return;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        }).start();*/
-//        prodConsumer();
-        prodConsumerCount();
+        }).start();
+    }
 
+    private static void prodConsumerStack(){
+
+        new Thread(()->{
+
+            for (String message : messages) {
+                synchronized (oStack) {
+                    if (countStack > 4) {
+                        try {
+                            oStack.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    listStack[countStack] = message;
+                    System.out.printf("%s   PUT %s size %s\n", Colors.BLUE, listStack[countStack], countStack);
+                    countStack++;
+                    oStack.notify();
+                }
+                sleep(1000);
+
+            }
+            endPutStack=false;
+        }).start();
+
+        new Thread(()->{
+                while (true) {
+            synchronized (oStack) {
+                    if(countStack<0||(countStack==0&&listStack[countStack]==null&&endPutStack)) {
+                        try {
+                            oStack.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }else if((countStack==0&&listStack[countStack]==null&&!endPutStack)){
+                        return;
+                    }
+                    if(countStack==0){
+//                    if ("DONE".equals(list[count]))
+//                        end = false;
+                        String cons=listStack[countStack];
+                        listStack[countStack] = null;
+                        System.out.printf("%s   GET %s size %s\n", Colors.GREEN, cons, countStack);
+                        countStack--;
+                    }else {
+//                    if ("DONE".equals(list[count-1]))
+//                        end = false;
+                        String cons = listStack[countStack - 1];
+                        listStack[countStack - 1] = null;
+                        System.out.printf("%s   GET %s size %s\n", Colors.GREEN, cons, countStack - 1);
+                        countStack--;
+                    }
+                    oStack.notify();
+
+                }
+                    sleep(2000);
+                }
+        }).start();
 
 
 
@@ -81,82 +147,70 @@ public class Program {
 
     }
 
+    private static void prodConsumerQueue() {
 
+        new Thread(() -> {
 
-    static void prodConsumerCount(){
+            for (String message : messages) {
+                synchronized (oQueue) {
+                    if (countQueue > 4) {
+                        try {
+                            oQueue.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    listQueue[countQueue] = message;
+                    System.out.printf("%s       PUT %s size %s\n", Colors.RESET, listQueue[countQueue], countQueue);
+                    countQueue++;
+                    oQueue.notify();
+                }
+                sleep(1000);
 
-        Thread produser=new Thread(()->{
-
-            for (int i = 0; i <messages.length ; i++) {
-                count++;
-                System.out.println(count);
             }
-        });
-        produser.start();
+            endPutQueue = false;
+        }).start();
+
+        new Thread(() -> {
+            while (true) {
+                sleep(2000);
+                synchronized (oQueue) {
+                    if (countQueue < 0 || (countQueue == 0 && listQueue[0] == null && endPutQueue)) {
+                        try {
+                            oQueue.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    } else if ((countQueue == 0 && listQueue[countQueue] == null && !endPutQueue)) {
+                        return;
+                    }
+                    String cons = listQueue[0];
+                    listQueue[0] = null;
+                    for (int i = 1; i < listQueue.length; i++) {
+                        if (listQueue[i] != null) {
+                            listQueue[i - 1] = listQueue[i];
+                            listQueue[i] = null;
+                        } else
+                            break;
+                    }
+
+                    System.out.printf("%s       GET %s size %s\n", Colors.CYAN, cons, countQueue - 1);
+                    countQueue--;
+                    oQueue.notify();
+
+                }
+            }
+        }).start();
+
+
     }
 
-
-
-    static void prodConsumer(){
-
-        Thread produser=new Thread(()->{
-
-            for (int i = 0; i <messages.length ; i++) {
-                synchronized (o) {
-
-                    if(count>5) {
-                        try {
-                            o.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    list[count] = messages[i];
-                    count++;
-                    System.out.printf("%s PUT %s -%s\n", Colors.BLUE, list[count-1], count-1);
-                    try {
-                        Thread.sleep(new Random().nextInt(1000));
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    o.notify();
-                }
-
-            }
-        });
-
-        Thread consumer=new Thread(()->{
-                while (end) {
-            synchronized (o) {
-                    if(count<0) {
-                        try {
-                            o.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if ("DONE".equals(list[count]))
-                        end = false;
-                    count--;
-                    System.out.printf("%s GET %s -%s\n", Colors.GREEN, list[count], count);
-                    list[count] = null;
-
-                    try {
-                        Thread.sleep(new Random().nextInt(1000));
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    o.notify();
-                }
-            }
-        });
-
-        produser.start();
-        consumer.start();
-
-
-
-
+    private static void sleep(int i) {
+        try {
+            Thread.sleep(new Random().nextInt(i));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
