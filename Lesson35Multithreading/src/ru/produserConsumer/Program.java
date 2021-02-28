@@ -5,9 +5,12 @@ import ru.Colors;
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Program {
-    private static BlockingQueue<String> queue = new ArrayBlockingQueue<>(5);
+    private static final BlockingQueue<String> queue = new ArrayBlockingQueue<>(5);
     private static final String[] messages =
             {
                     "1 What is blue?",
@@ -30,23 +33,32 @@ public class Program {
                     "18 The snow that falls is white!",
                     "19 What is black?",
                     "20 Black is the sky at night!",
-                    "21 DONE"
+                    "21 DONE",
+                    "22 WERE"
             };
-    private static String[] listQueue = new String[5];
-    private static String[] listStack = new String[5];
+    private static final String[] listQueue = new String[5];
+    private static final String[] listStack = new String[5];
+    private static final String[] listReentrantLock  = new String[5];
     private static volatile int countQueue = 0;
     private static volatile int countStack = 0;
+    private static  int countReentrantLock  = 0;
     private static boolean endPutQueue = true;
     private static boolean endPutStack = true;
+    private static boolean endPutReentrantLock  = true;
+    private static int endPutReentrantLock1  = 0;
     private static final Object oQueue = new Object();
     private static final Object oStack = new Object();
+    private static final Lock lock=new ReentrantLock(true);
+    private static final Condition conditionProd=lock.newCondition();
+    private static final Condition conditionCons=lock.newCondition();
 
 
     public static void main(String[] args) {
 
-        prodConsumerBlockingQueue();
+//        prodConsumerBlockingQueue();
 //        prodConsumerStack();
 //        prodConsumerQueue();
+        prodConsumerReentrantLock();
 
 
     }
@@ -58,7 +70,7 @@ public class Program {
                 try {
                     System.out.printf("%sPUT %s - %s\n", Colors.RED, message, queue.size());
                     queue.put(message);
-                    sleep(3000);
+                    sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -100,10 +112,13 @@ public class Program {
                     countStack++;
                     oStack.notify();
                 }
-                sleep(1000);
+                sleep(3000);
 
             }
+            synchronized (oStack){
+                oStack.notify();
             endPutStack=false;
+            }
         }).start();
 
         new Thread(()->{
@@ -115,7 +130,8 @@ public class Program {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                    }else if((countStack==0&&listStack[countStack]==null&&!endPutStack)){
+                    }
+                    if((countStack==0&&listStack[countStack]==null&&!endPutStack)){
                         return;
                     }
                     if(countStack==0){
@@ -136,7 +152,7 @@ public class Program {
                     oStack.notify();
 
                 }
-                    sleep(2000);
+                    sleep(20);
                 }
         }).start();
 
@@ -165,15 +181,18 @@ public class Program {
                     countQueue++;
                     oQueue.notify();
                 }
-                sleep(1000);
+                sleep(1500);
 
             }
-            endPutQueue = false;
+            synchronized (oQueue) {
+                oQueue.notify();
+                endPutQueue = false;
+            }
         }).start();
 
         new Thread(() -> {
             while (true) {
-                sleep(2000);
+                sleep(50);
                 synchronized (oQueue) {
                     if (countQueue < 0 || (countQueue == 0 && listQueue[0] == null && endPutQueue)) {
                         try {
@@ -181,7 +200,8 @@ public class Program {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                    } else if ((countQueue == 0 && listQueue[countQueue] == null && !endPutQueue)) {
+                    }
+                    if ((countQueue == 0 && listQueue[countQueue] == null && !endPutQueue)) {
                         return;
                     }
                     String cons = listQueue[0];
@@ -199,6 +219,77 @@ public class Program {
                     oQueue.notify();
 
                 }
+            }
+        }).start();
+
+
+    }
+
+    private static void prodConsumerReentrantLock () {
+
+        new Thread(() -> {
+
+
+            for (String message : messages) {
+                lock.lock();
+                try {
+                    if (countReentrantLock > 4) {
+                        try {
+                            conditionProd.await();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    listReentrantLock[countReentrantLock] = message;
+                    System.out.printf("%s           PUT %s size %s\n", Colors.RESET, listReentrantLock[countReentrantLock], countReentrantLock);
+                    countReentrantLock++;
+                    endPutReentrantLock1++;
+                    conditionCons.signal();
+                } finally {
+                    lock.unlock();
+                }
+//                    sleep(150);
+
+            }
+            /*lock.lock();
+            conditionCons.signal();
+            endPutReentrantLock = false;
+            lock.unlock();*/
+        }).start();
+
+        new Thread(() -> {
+            while (true) {
+//                sleep(2000);
+                lock.lock();
+                try {
+                if (countReentrantLock < 0 || (countReentrantLock == 0 && listReentrantLock[0] == null && endPutReentrantLock1!=messages.length)) {
+//                if (countReentrantLock < 0 || (countReentrantLock == 0 && listReentrantLock[0] == null && endPutReentrantLock)) {
+                    try {
+                        conditionCons.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if ((countReentrantLock == 0 && listReentrantLock[0] == null && endPutReentrantLock1==messages.length)) {
+                    return;
+                }
+                String cons = listReentrantLock[0];
+                listReentrantLock[0] = null;
+                for (int i = 1; i < listReentrantLock.length; i++) {
+                    if (listReentrantLock[i] != null) {
+                        listReentrantLock[i - 1] = listReentrantLock[i];
+                        listReentrantLock[i] = null;
+                    } else
+                        break;
+                }
+
+                System.out.printf("%s           GET %s size %s\n", Colors.CYAN, cons, countReentrantLock - 1);
+                countReentrantLock--;
+                conditionProd.signal();
+                }finally{
+                lock.unlock();
+            }
+
             }
         }).start();
 
