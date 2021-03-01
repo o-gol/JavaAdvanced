@@ -5,6 +5,7 @@ import ru.Colors;
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -44,7 +45,7 @@ public class Program {
     private static  int countReentrantLock  = 0;
     private static boolean endPutQueue = true;
     private static boolean endPutStack = true;
-    private static boolean endPutReentrantLock  = true;
+//    private static boolean endPutReentrantLock  = true;
     private static int endPutReentrantLock1  = 0;
     private static final Object oQueue = new Object();
     private static final Object oStack = new Object();
@@ -55,10 +56,11 @@ public class Program {
 
     public static void main(String[] args) {
 
-//        prodConsumerBlockingQueue();
-//        prodConsumerStack();
-//        prodConsumerQueue();
+        prodConsumerBlockingQueue();
+        prodConsumerStack();
+        prodConsumerQueue();
         prodConsumerReentrantLock();
+
 
 
     }
