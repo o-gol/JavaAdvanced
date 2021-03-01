@@ -1,20 +1,22 @@
 package ru.semaphore;
 
-public class Operator {
-    private final String name;
+import ru.Colors;
 
-    public Operator(String name) {
+public class Operator {
+    private final int name;
+
+    public Operator(int name) {
         this.name = name;
     }
 
-    public String getName() {
+    public int getName() {
         return name;
     }
 
     public void getClient(Client client){
-        System.out.printf("Operator %s BEGIN work with Client %s\n",name,client.getNumber());
+        System.out.printf("%s                   Operator %s BEGIN work with Client %s\n", Colors.BLUE,name,client.getNumber());
         Program.sleep(3000);
-        System.out.printf("Operator %s STOP work with Client %s\n",name,client.getNumber());
+        System.out.printf("%s                   Operator %s STOP work with Client %s\n",Colors.RED,name,client.getNumber());
 
     }
 }
