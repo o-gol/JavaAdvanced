@@ -13,7 +13,7 @@ public class Phone implements Phoneble {
 
     @Override
     public void send(String messages) {
-        System.out.printf("You message: \"%s\" was send \n");
+        System.out.printf("You message: \"%s\" was send \n",messages);
 
     }
 
