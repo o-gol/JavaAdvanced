@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+    <context:property-placeholder location="musicPlayer.properties"/>
+
+    <bean id="classicMusic" class="ru.yandex.olejkai.xmlConf.objects.ClassicMusic"
+    init-method="doInit"
+    destroy-method="doDestr">
+        <constructor-arg name="name" value="Bah-Sonata"/>
+    </bean>
+    <bean id="rackMusic" class="ru.yandex.olejkai.xmlConf.objects.RackMusic">
+        <property name="name" value="${rackMusic.name}"/>
+    </bean>
+    <bean id="rapMusic" class="ru.yandex.olejkai.xmlConf.objects.RapMusic">
+        <property name="name" value="${rapMusic.name}"/>
+    </bean>
+    <bean id="musicPlayerClass" class="ru.yandex.olejkai.xmlConf.services.MusicPlayer">
+        <constructor-arg name="music" ref="classicMusic"/>
+        <property name="volume" value="70"/>
+    </bean>
+    <bean id="musicPlayerRack" class="ru.yandex.olejkai.xmlConf.services.MusicPlayer">
+        <constructor-arg name="music" ref="${musicPlayer.abstractMusic}"/>
+        <property name="volume" value="50"/>
+    </bean>
+    <util:list id="abstractMusicList" list-class="java.util.ArrayList">
+        <ref bean="classicMusic"/>
+        <ref bean="rackMusic"/>
+    </util:list>
+
+    <bean id="musicPlayer" class="ru.yandex.olejkai.xmlConf.services.MusicPlayer" scope="prototype">
+        <constructor-arg name="musicList" ref="abstractMusicList" />
+        <property name="music" ref="rapMusic"/>
+        <property name="volume" value="20"/>
+    </bean>
+
+
+
+</beans>

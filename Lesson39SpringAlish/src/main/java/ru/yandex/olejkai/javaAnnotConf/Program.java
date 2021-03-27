@@ -17,11 +17,7 @@ public class Program {
         AnnotationConfigApplicationContext context=
                 new AnnotationConfigApplicationContext(SpringConfig.class);
         MusicPlayer player = context.getBean("player", MusicPlayer.class);
-//        List<AbstractSong> songs = SongListFactory.songsCreator("D:\\Java_projekts\\UdemyJavaAdvanced\\Lesson39SpringAlish\\src\\main\\resources\\songs.txt");
-//        System.out.println(songs);
-
-//        MusicPlayer player=new MusicPlayer(new Song("BAH-LALALA", TypesEnum.CLASSIC));
-//        player.play();
+        player.play();
         System.out.println("----------------------------------------------");
         player.playRandom();
         System.out.println("----------------------------------------------");

@@ -33,7 +33,10 @@ public class SpringConfig {
 
     @Bean
     public List<AbstractSong> songsCreater() throws IOException {
-        return SongListFactory.songsCreator("D:\\Java_projekts\\UdemyJavaAdvanced\\Lesson39SpringAlish\\src\\main\\resources\\songs.txt");
+        return SongListFactory.songsCreator(
+//                ("I:\\2. Java\\JavaProjekts\\JavaAdvanced\\Lesson39SpringAlish\\src\\main\\resources\\songs.txt")
+                ("src/main/resources/songs.txt")
+        );
 
     }
 
