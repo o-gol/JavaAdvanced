@@ -12,6 +12,7 @@
     <title>JDBC</title>
 </head>
 <body>
+<h3>ПРИВЕТ</h3>
 <%
     final  String CONNECTION_STRING=
             "jdbc:mysql://127.0.0.1:3306/wed?user=root&password=pa$$w0rd&useSSL=false";

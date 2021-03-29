@@ -45,6 +45,14 @@
         <url-pattern>/jdbc_jsp</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>Index</servlet-name>
+        <jsp-file>/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>SetServlet</servlet-name>
         <servlet-class>сookies.SetServlet</servlet-class>
     </servlet>

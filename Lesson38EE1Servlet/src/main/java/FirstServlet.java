@@ -27,7 +27,7 @@ public class FirstServlet extends HttpServlet {
         String quantity=(request.getParameter("quantity"));
 
         PrintWriter writer = response.getWriter();
-        writer.printf("<html>\n<h3>hello_world</h3>\n<h3>%s</h3>\n<h3>You count is %s</h3>\n<h3>Cart with %s - %s</h3>\n</html>",name,countOfSession,name,quantity);
+        writer.printf("<html>\n<h3>hello_world</h3>\n<h3>%s</h3>\n<h3>You count is %s</h3>\n<h3>Cart with %s - %s</h3>\n<h3>ПРИВЕТ</h3>\n</html>",name,countOfSession,name,quantity);
 //        response.sendRedirect(String.format("/firstJsp.jsp?name=%s",name));
     }
 }

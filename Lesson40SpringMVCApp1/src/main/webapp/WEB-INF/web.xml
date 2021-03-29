@@ -23,4 +23,13 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>Index</servlet-name>
+    <jsp-file>/my_view/index.html</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/index1</url-pattern>
+  </servlet-mapping>
+
 </web-app>
