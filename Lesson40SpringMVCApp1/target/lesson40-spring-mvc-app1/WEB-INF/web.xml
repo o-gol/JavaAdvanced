@@ -62,13 +62,15 @@
   </servlet-mapping>
 
 
+
+
   <!--Позволяет работать с русскими символами-->
-  <filter>
+  <!--<filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
     <init-param>
       <param-name>encoding</param-name>
-      <param-value>UTF-8</param-value>
+      <param-value>utf-8</param-value>
     </init-param>
     <init-param>
       <param-name>forceEncoding</param-name>
@@ -78,16 +80,16 @@
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping>-->
 
-  <servlet>
+  <!--<servlet>
     <servlet-name>Index</servlet-name>
     <jsp-file>/my_view/index.html</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Index</servlet-name>
     <url-pattern>/index1</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping>-->
 
 
 

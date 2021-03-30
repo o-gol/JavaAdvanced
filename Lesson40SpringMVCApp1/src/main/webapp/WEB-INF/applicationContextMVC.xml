@@ -14,10 +14,12 @@
     <context:component-scan base-package="ru.yandex.olejkai.spring_mvc"/>
 
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/views/my_view/css/" />
+    <mvc:resources mapping="/js/**" location="/WEB-INF/views/my_view/js/" />
 
-    <bean  class = " org.springframework.http.converter.StringHttpMessageConverter " >
+    <!--<bean  class = " org.springframework.http.converter.StringHttpMessageConverter " >
         <property  name = " supportedMediaTypes "  value = " text / plain; charset = UTF-8 " />
-    </bean >
+    </bean >-->
 
     <!--<bean class = "org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
@@ -29,9 +31,14 @@
         </property>
     </bean>-->
 
+
+
     <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
-        <property name="prefix" value="/WEB-INF/views/"/>
+<!--        <property name="prefix" value="/WEB-INF/views/"/>-->
+        <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".html"/>
+        <property name="characterEncoding" value="UTF-8"/>
+
 <!--        <property name="prefix" value="/WEB-INF/views/my_view/"/>-->
 
     </bean>
@@ -39,11 +46,14 @@
     <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
         <property name="enableSpringELCompiler" value="true"/>
+
     </bean>
 
     <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine"/>
         <property name="order" value="1"/>
         <property name="viewNames" value="*"/>
+        <property name="characterEncoding" value="UTF-8"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
     </bean>
 </beans>
