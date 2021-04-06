@@ -1,0 +1,11 @@
+settings -> tools -> terminal
+
+Идем в настройки(ctrl+alt+s).
+
+settings -> tools -> terminal
+
+В поле shell path(путь до терминала) указываем путь из ярлыка Git Bash в пуске.
+
+"C:\Program Files\Git\bin\sh.exe" --login -i
+
+Теперь при открытии терминала в intellij idea мы используем Git Bash.
