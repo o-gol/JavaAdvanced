@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Goodbye</title>
 </head>
 <body>
-<a href="/first/hello">Goodbye</a>
-<a href="/exit">Exit</a>
+<a href="/first/hello">Hello</a>
+<p> <a href="/first/goodbye?name=MyName&age=MyAge">GoodbyeParam</a> </p>
+<p><a href="/exit">Exit</a></p>
+<p th:text="${message}"/>
 </body>
 </html>
