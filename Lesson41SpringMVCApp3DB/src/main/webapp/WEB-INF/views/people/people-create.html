@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<!--      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--      xsi:schemaLocation="http://thymeleaf.org"-->
+
+
 <head>
     <meta charset="UTF-8">
     <title>Create People</title>
@@ -10,10 +15,69 @@
         Записать
     </a>
 </p>
-<h1>
+<p>
+    <a href="/people/people-create?name=Olli&surName=CocGGGe&age=29">
+        Записать
+    </a>
+</p>
+<p>
+    <a href="/people/people-create?name=Jimmy&surName=GGe&age=41">
+        Записать
+    </a>
+</p>
+
+<div>
+    <h2>
+        <form method="post" action="/people/people-create">
+
+            <label for="name">Name</label>
+            <input name="name" type="text" id="name">
+
+            <br>
+            <label for="surName">Surname</label>
+            <input name="surName" type="text" id="surName">
+
+            <br>
+            <label for="age">Age</label>
+            <input name="age" type="text" id="age">
+
+            <br>
+            <input type="submit" value="Add Person">
+
+
+        </form>
+    </h2>
+</div>
+
+
+<h2>
+    <p>
+    <h1>This Person by Id</h1>
+    </p>
+    <p th:text="${findPersonById}">
+
+    </p>
+</h2>
+<h2>
+    <p>
+    <h1>This Person</h1>
+    </p>
     <p th:text="${addingPeople}">
 
     </p>
-</h1>
+</h2>
+<h2>
+    <p>
+    <h1>All Person</h1>
+    </p>
+    <p th:text="${allPeople}">
+
+    </p>
+</h2>
+
+<div th:each="people : ${allPeople}">
+    <a th:href="@{/people/{id}(id=${people.getId()})}" th:text="${people.getName()}">User</a>
+</div>
+
 </body>
 </html>

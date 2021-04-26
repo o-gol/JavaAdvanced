@@ -3,14 +3,26 @@ package ru.yandex.olejkai.model;
 import java.util.Objects;
 
 public class People {
+    private static int globId;
+    private int id;
     private String name;
     private String surName;
     private int age;
 
     public People(String name, String surName, int age) {
+        globId++;
+        this.id=globId;
         this.name = name;
         this.surName = surName;
         this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
