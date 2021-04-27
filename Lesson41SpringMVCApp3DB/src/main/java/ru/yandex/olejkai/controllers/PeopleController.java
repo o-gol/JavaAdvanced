@@ -37,7 +37,7 @@ public class PeopleController {
         if (name != null || surName != null || age != null) {
             People thisPeople = new People(name, surName, Integer.parseInt(age));
             PeopleDAO.addPeople(peopleList, thisPeople);
-            model.addAttribute("addingPeople", String.format("Add person is %s \n", PeopleDAO.getPeople(peopleList, thisPeople)));
+            model.addAttribute("addingPeople", PeopleDAO.getPeople(peopleList, thisPeople));
         }
 
         if (PeopleDAO.getAllPeople(peopleList).size() != 0)
@@ -61,10 +61,17 @@ public class PeopleController {
     @PostMapping("/people-create")
     public String addPeopleByPost(@RequestParam(value = "name", required = false) String name,
                                   @RequestParam(value = "surName", required = false) String surName,
-                                  @RequestParam(value = "age", required = false) Integer age) {
+                                  @RequestParam(value = "age", required = false) Integer age,
+                                  Model model) {
         if (name != "" || surName != "" || age != null) {
-            PeopleDAO.addPeople(peopleList, new People(name, surName, age));
+            People people=new People(name, surName, age);
+            PeopleDAO.addPeople(peopleList, people);
+            model.addAttribute("addingPeople",PeopleDAO.getPeople(peopleList,people));
         }
+        if (PeopleDAO.getAllPeople(peopleList).size() != 0)
+            model.addAttribute("allPeople", PeopleDAO.getAllPeople(peopleList));
+        else
+            model.addAttribute("allPeople", "Here not one person");
         return "/views/people/people-create.html";
     }
 
