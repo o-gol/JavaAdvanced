@@ -1,8 +1,6 @@
 #!/bin/bash
 cd /home/golvik/java_projects/advanced_java/JavaAdvanced
 read -p 'textCommit= ' commit_info
-echo var do...
 git add -A
-echo add do...
 git commit -a -m$commit_info
-echo commit do...
+git push
