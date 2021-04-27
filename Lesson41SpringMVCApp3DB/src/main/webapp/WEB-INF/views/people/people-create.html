@@ -28,7 +28,7 @@
 
 <div>
     <h2>
-        <form method="post" action="/people/people-create">
+        <form th:method="post" th:action="@{/people/people-create}" th:object="${people1}">
 
             <label for="name">Name</label>
             <input name="name" type="text" id="name">
@@ -59,25 +59,24 @@
     </p>
 </h2>
 <h2>
-    <p>
-    <h1>This Person</h1>
-    </p>
-    <p th:text="${addingPeople}">
-
-    </p>
+    <p><h1>This Person</h1></p>
+    <p th:text="${addingPeople}"></p>
+    <p th:text="${people1}"></p>
 </h2>
 <h2>
     <p>
-    <h1>All Person</h1>
+    <h1 th:text="${allPeopleHeader}">All Person</h1>
     </p>
     <p th:text="${allPeople}">
 
     </p>
 </h2>
 
+<p>
+<h1 th:text="${allPeopleHeader}">All Person</h1>
+</p>
 <div th:each="people : ${allPeople}">
     <a th:href="@{/people/{id}(id=${people.getId()})}" th:text="${people.getName()}">User</a>
 </div>
-
 </body>
 </html>

@@ -9,12 +9,23 @@ public class People {
     private String surName;
     private int age;
 
+    public People() {
+    }
+
     public People(String name, String surName, int age) {
         globId++;
         this.id=globId;
         this.name = name;
         this.surName = surName;
         this.age = age;
+    }
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public int getAge() {
+        return age;
     }
 
     public int getId() {
@@ -28,6 +39,7 @@ public class People {
     @Override
     public String toString() {
         return "People{" +
+                "id="+id+'\''+
                 "name='" + name + '\'' +
                 ", surName='" + surName + '\'' +
                 ", age=" + age +

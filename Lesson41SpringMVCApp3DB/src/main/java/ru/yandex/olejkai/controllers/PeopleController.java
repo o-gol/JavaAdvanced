@@ -45,6 +45,8 @@ public class PeopleController {
         else
             model.addAttribute("allPeople", "Here not one person");
 
+        model.addAttribute("people1",new People());
+
 
         System.out.println("---------------------Start");
         for (People people :
@@ -58,7 +60,7 @@ public class PeopleController {
     }
 
 
-    @PostMapping("/people-create")
+    /*@PostMapping("/people-create")
     public String addPeopleByPost(@RequestParam(value = "name", required = false) String name,
                                   @RequestParam(value = "surName", required = false) String surName,
                                   @RequestParam(value = "age", required = false) Integer age,
@@ -73,6 +75,36 @@ public class PeopleController {
         else
             model.addAttribute("allPeople", "Here not one person");
         return "/views/people/people-create.html";
+    }*/
+
+    @PostMapping("/people-create")
+    public String addPeopleByPost(@ModelAttribute("people1") People people,
+                                  Model model) {
+        boolean flag=people.getId()!=0 || people.getName() != null || people.getSurName() != null || people.getAge() != 0;
+        System.out.println(flag);
+        System.out.println(people.getId()!=0);
+        System.out.println(people.getId());
+        System.out.println( people.getName() != null);
+        System.out.println( people.getName() );
+        System.out.println(people.getSurName() != null);
+        System.out.println(people.getSurName());
+        System.out.println(people.getAge() != 0);
+        System.out.println(people.getAge());
+        if (people.getId()!=0 || people.getName() != null || people.getSurName() != null || people.getAge() != 0) {
+            PeopleDAO.addPeople(peopleList, people);
+            model.addAttribute("addingPeople", PeopleDAO.getPeople(peopleList, people));
+        }
+        if (PeopleDAO.getAllPeople(peopleList).size() != 0)
+            model.addAttribute("allPeople", PeopleDAO.getAllPeople(peopleList));
+        else
+            model.addAttribute("allPeople", "Here not one person");
+        return "/views/people/people-create.html";
+        //return "redirect:people-create";
+    }
+
+    @ModelAttribute("allPeopleHeader")
+    public String showAllPeople(){
+        return "All PEOPLE";
     }
 
 
