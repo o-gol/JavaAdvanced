@@ -28,9 +28,9 @@
 
 <div>
     <h2>
-        <form th:method="post" th:action="@{/people/people-create}" th:object="${people1}">
+<!--        <form th:method="post" th:action="@{/people/people-create}" th:object="${people}">-->
 
-            <label for="name">Name</label>
+            <!--<label for="name">Name</label>
             <input name="name" type="text" id="name">
 
             <br>
@@ -42,10 +42,51 @@
             <input name="age" type="text" id="age">
 
             <br>
+            <input type="submit" value="Add Person">-->
+        <form th:method="post" th:action="@{/people/people-create}" th:object="${people1}" >
+
+             <label for="name">Name</label>
+            <input  type="text"
+                    th:field="*{name}"
+                    id="name">
+
+            <br>
+            <label for="surName">Surname</label>
+            <input   type="text"
+                     th:field="*{surName}"
+                     id="surName">
+
+            <br>
+            <label for="age">Age</label>
+            <input   type="text"
+                     th:field="*{age}"
+                     id="age">
+
+            <br>
             <input type="submit" value="Add Person">
 
-
         </form>
+
+        <!--<form th:method="post" th:action="@{/people/people-create}" th:object="${people1}" >
+
+             <label for="name">Name</label>
+            <input  type="text"
+                    id="name">
+
+            <br>
+            <label for="surName">Surname</label>
+            <input   type="text"
+                     id="surName">
+
+            <br>
+            <label for="age">Age</label>
+            <input   type="text"
+                     id="age">
+
+            <br>
+            <input type="submit" value="Add Person">
+
+        </form>-->
     </h2>
 </div>
 
@@ -59,8 +100,9 @@
     </p>
 </h2>
 <h2>
-    <p><h1>This Person</h1></p>
+    <p><h1>This Person addingPeople</h1></p>
     <p th:text="${addingPeople}"></p>
+    <p><h1>This Person people1</h1></p>
     <p th:text="${people1}"></p>
 </h2>
 <h2>

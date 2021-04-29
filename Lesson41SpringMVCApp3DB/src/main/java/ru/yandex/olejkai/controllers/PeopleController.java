@@ -3,15 +3,10 @@ package ru.yandex.olejkai.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.expression.Lists;
 import ru.yandex.olejkai.DAO.PeopleDAO;
 import ru.yandex.olejkai.model.People;
-
-import java.lang.reflect.Member;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/people")
@@ -32,9 +27,10 @@ public class PeopleController {
     public String createPeople(@RequestParam(value = "name", required = false) String name,
                                @RequestParam(value = "surName", required = false) String surName,
                                @RequestParam(value = "age", required = false) String age,
+                               @ModelAttribute("people1") People people,
                                Model model
     ) {
-        if (name != null || surName != null || age != null) {
+        if (name != null && surName != null && age != null) {
             People thisPeople = new People(name, surName, Integer.parseInt(age));
             PeopleDAO.addPeople(peopleList, thisPeople);
             model.addAttribute("addingPeople", PeopleDAO.getPeople(peopleList, thisPeople));
@@ -45,14 +41,15 @@ public class PeopleController {
         else
             model.addAttribute("allPeople", "Here not one person");
 
-        model.addAttribute("people1",new People());
+//        model.addAttribute("people1",new People());
+        model.addAttribute("allPeopleHeader","All Person");
 
 
         System.out.println("---------------------Start");
-        for (People people :
+        for (People peopleInList :
                 peopleList) {
 
-            System.out.println(people);
+            System.out.println(peopleInList);
         }
 
         System.out.println("---------------------End");
@@ -77,11 +74,19 @@ public class PeopleController {
         return "/views/people/people-create.html";
     }*/
 
+
+
+
+
+
+
     @PostMapping("/people-create")
+
     public String addPeopleByPost(@ModelAttribute("people1") People people,
                                   Model model) {
-        boolean flag=people.getId()!=0 || people.getName() != null || people.getSurName() != null || people.getAge() != 0;
-        System.out.println(flag);
+        System.out.println(people);
+        boolean flag=people.getName() != "" && people.getSurName() != "" && people.getAge() != 0;
+        /*System.out.println(flag);
         System.out.println(people.getId()!=0);
         System.out.println(people.getId());
         System.out.println( people.getName() != null);
@@ -89,17 +94,18 @@ public class PeopleController {
         System.out.println(people.getSurName() != null);
         System.out.println(people.getSurName());
         System.out.println(people.getAge() != 0);
-        System.out.println(people.getAge());
-        if (people.getId()!=0 || people.getName() != null || people.getSurName() != null || people.getAge() != 0) {
+        System.out.println(people.getAge());*/
+        if (people.getName() != "" && people.getSurName() != "" && people.getAge() != 0) {
             PeopleDAO.addPeople(peopleList, people);
             model.addAttribute("addingPeople", PeopleDAO.getPeople(peopleList, people));
+
         }
         if (PeopleDAO.getAllPeople(peopleList).size() != 0)
             model.addAttribute("allPeople", PeopleDAO.getAllPeople(peopleList));
         else
             model.addAttribute("allPeople", "Here not one person");
         return "/views/people/people-create.html";
-        //return "redirect:people-create";
+//        return "redirect:people-create";
     }
 
     @ModelAttribute("allPeopleHeader")

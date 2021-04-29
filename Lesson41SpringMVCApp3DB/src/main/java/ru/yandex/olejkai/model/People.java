@@ -20,6 +20,30 @@ public class People {
         this.age = age;
     }
 
+    public static void setGlobId(int globId) {
+        People.globId = globId;
+    }
+
+    public static int getGlobId() {
+        return globId;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public String getSurName() {
         return surName;
     }
