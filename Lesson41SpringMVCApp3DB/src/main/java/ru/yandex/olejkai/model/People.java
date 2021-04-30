@@ -1,8 +1,9 @@
 package ru.yandex.olejkai.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class People {
+public class People implements Serializable {
     private static int globId;
     private int id;
     private String name;

@@ -11,62 +11,108 @@
 </head>
 <body>
 <p>
+    <a href="/people/people-create">
+        Main
+    </a>
+</p>
+
+<p>
     <a href="/people/people-create?name=Alik&surName=Coce&age=25">
         Записать
     </a>
 </p>
+
 <p>
     <a href="/people/people-create?name=Olli&surName=CocGGGe&age=29">
         Записать
     </a>
 </p>
+
 <p>
     <a href="/people/people-create?name=Jimmy&surName=GGe&age=41">
         Записать
     </a>
 </p>
 
+
 <div>
     <h2>
-<!--        <form th:method="post" th:action="@{/people/people-create}" th:object="${people}">-->
+        <!--        <form th:method="post" th:action="@{/people/people-create}" th:object="${people}">-->
 
-            <!--<label for="name">Name</label>
-            <input name="name" type="text" id="name">
+        <!--<label for="name">Name</label>
+        <input name="name" type="text" id="name">
 
-            <br>
-            <label for="surName">Surname</label>
-            <input name="surName" type="text" id="surName">
+        <br>
+        <label for="surName">Surname</label>
+        <input name="surName" type="text" id="surName">
 
-            <br>
-            <label for="age">Age</label>
-            <input name="age" type="text" id="age">
+        <br>
+        <label for="age">Age</label>
+        <input name="age" type="text" id="age">
 
-            <br>
-            <input type="submit" value="Add Person">-->
-        <form th:method="post" th:action="@{/people/people-create}" th:object="${people1}" >
+        <br>
+        <input type="submit" value="Add Person">-->
+        <h2>
+            <label for="create_form">Create Form</label>
+            <form id="create_form" th:method="post" th:action="@{/people/people-create}" th:object="${people1}">
 
-             <label for="name">Name</label>
-            <input  type="text"
-                    th:field="*{name}"
-                    id="name">
+                <label for="name">Name</label>
+                <input name="name"
+                       type="text"
+                       value=""
+                       id="name">
+                <!--                    th:field="*{name}"-->
 
-            <br>
-            <label for="surName">Surname</label>
-            <input   type="text"
-                     th:field="*{surName}"
-                     id="surName">
+                <br>
+                <label for="surName">Surname</label>
+                <input name="surName"
+                       type="text"
+                       value=""
+                       id="surName">
+                <!--                     th:field="*{surName}"-->
 
-            <br>
-            <label for="age">Age</label>
-            <input   type="text"
-                     th:field="*{age}"
-                     id="age">
+                <br>
+                <label for="age">Age</label>
+                <input name="age"
+                       type="text"
+                       value="0"
+                       id="age">
+                <!--                     th:field="*{age}"-->
 
-            <br>
-            <input type="submit" value="Add Person">
+                <br>
+                <input type="submit" value="Add Person">
 
-        </form>
+            </form>
+        </h2>
+        <h2 hidden th:hidden="${hidden}">
+            <label for="update_form">Update Form</label>
+            <form id="update_form" th:method="patch" th:action="@{/people/{id}/update(id=${people1.getId()})}"
+                  th:object="${people1}">
 
+                <label for="name">Name</label>
+                <input name="name"
+                       type="text"
+                       th:field="*{name}"
+                       class="name">
+                <br>
+                <label for="surName">Surname</label>
+                <input name="surName"
+                       type="text"
+                       th:field="*{surName}"
+                       class="surName">
+
+                <br>
+                <label for="age">Age</label>
+                <input name="age"
+                       type="text"
+                       th:field="*{age}"
+                       class="age">
+
+                <br>
+                <input type="submit" value="Update Person">
+
+            </form>
+        </h2>
         <!--<form th:method="post" th:action="@{/people/people-create}" th:object="${people1}" >
 
              <label for="name">Name</label>
@@ -89,21 +135,20 @@
         </form>-->
     </h2>
 </div>
-
-
-<h2>
+<!--<h2>
     <p>
     <h1>This Person by Id</h1>
     </p>
     <p th:text="${findPersonById}">
 
     </p>
-</h2>
+</h2>-->
 <h2>
-    <p><h1>This Person addingPeople</h1></p>
-    <p th:text="${addingPeople}"></p>
-    <p><h1>This Person people1</h1></p>
-    <p th:text="${people1}"></p>
+    <p>
+    <h1>STATUS</h1></p>
+    <p th:text="${status}"></p>
+    <!--<p><h1>This Person people1</h1></p>
+    <p th:text="${people1}"></p>-->
 </h2>
 <h2>
     <p>
@@ -118,7 +163,16 @@
 <h1 th:text="${allPeopleHeader}">All Person</h1>
 </p>
 <div th:each="people : ${allPeople}">
-    <a th:href="@{/people/{id}(id=${people.getId()})}" th:text="${people.getName()}">User</a>
+
+        <a th:href="@{/people/{id}(id=${people.getId()})}" th:text="${people.getName()}">User</a>
+        <a th:href="@{/people/{id}/update(id=${people.getId()})}">Update</a>
+        <form th:method="delete" th:action="@{/people/{id}/delete(id=${people.getId()})}">
+            <br>
+            <input type="submit" value="Delete">
+
+        </form>
+<!--            <a th:method="delete" th:href="@{/people/{id}/delete(id=${people.getId()})}">Delete</a>-->
+
 </div>
 </body>
 </html>

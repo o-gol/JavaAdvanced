@@ -5,6 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.olejkai.DAO.PeopleDAO;
 import ru.yandex.olejkai.model.People;
+import ru.yandex.olejkai.utils.CloneBySerializable;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +36,7 @@ public class PeopleController {
         if (name != null && surName != null && age != null) {
             People thisPeople = new People(name, surName, Integer.parseInt(age));
             PeopleDAO.addPeople(peopleList, thisPeople);
-            model.addAttribute("addingPeople", PeopleDAO.getPeople(peopleList, thisPeople));
+            model.addAttribute("status", String.format("%s was adding to list",PeopleDAO.getPeople(peopleList, thisPeople)) );
         }
 
         if (PeopleDAO.getAllPeople(peopleList).size() != 0)
@@ -42,7 +45,10 @@ public class PeopleController {
             model.addAttribute("allPeople", "Here not one person");
 
 //        model.addAttribute("people1",new People());
-        model.addAttribute("allPeopleHeader","All Person");
+
+
+//        boolean hidden=true;
+        model.addAttribute("hidden",true);
 
 
         System.out.println("---------------------Start");
@@ -75,17 +81,66 @@ public class PeopleController {
     }*/
 
 
+    @GetMapping("/{id}/update")
+    public String toUpdateForm(@PathVariable("id") int id,
+                               Model model)
+    {
+        model.addAttribute("people1", PeopleDAO.getPeopleByID(peopleList, id));
+        model.addAttribute("hidden", false);
+        model.addAttribute("allPeople",PeopleDAO.getAllPeople(peopleList));
+        return "/views/people/people-create.html";
+    }
+
+    @PatchMapping("/{id}/update")
+    public String updatePeople(@ModelAttribute("people1") People people,
+                               @PathVariable("id") int id,
+                               Model model) throws IOException, ClassNotFoundException {
+        People beforeUpdate=CloneBySerializable.clone( PeopleDAO.getPeopleByID(peopleList,id));
+        People peopleToUpdate=PeopleDAO.getPeopleByID(peopleList,id);
+        if(people.getName()!=null)
+            peopleToUpdate.setName(people.getName());
+        if(people.getSurName()!=null)
+            peopleToUpdate.setSurName(people.getSurName());
+        if(people.getAge()!=0)
+            peopleToUpdate.setAge(people.getAge());
+        if (PeopleDAO.getAllPeople(peopleList).size() != 0)
+            model.addAttribute("allPeople", PeopleDAO.getAllPeople(peopleList));
+        else
+            model.addAttribute("allPeople", "Here not one person");
+        model.addAttribute("hidden", true);
+        model.addAttribute("status", String.format("%s was update to %s",beforeUpdate,peopleToUpdate) );
+        return "/views/people/people-create.html";
+    }
+
+
+    @DeleteMapping("/{id}/delete")
+    public String deletePeopleById(Model model,
+                                @PathVariable("id") int id) throws IOException, ClassNotFoundException {
+//        People beforeDeleting=CloneBySerializable.clone(PeopleDAO.getPeopleByID(peopleList,id));
+        PeopleDAO.deletePeopleByID(peopleList,id);
+        /*model.addAttribute("hidden", true);
+        model.addAttribute("status", String.format("%s was deleted",beforeDeleting) );
+        if (PeopleDAO.getAllPeople(peopleList).size() != 0)
+            model.addAttribute("allPeople", PeopleDAO.getAllPeople(peopleList));
+        else
+            model.addAttribute("allPeople", "Here not one person");*/
+        return "/views/people/people-create.html";
+//                return "redirect:people-create";
+
+    }
+
+
 
 
 
 
 
     @PostMapping("/people-create")
-
     public String addPeopleByPost(@ModelAttribute("people1") People people,
                                   Model model) {
         System.out.println(people);
         boolean flag=people.getName() != "" && people.getSurName() != "" && people.getAge() != 0;
+
         /*System.out.println(flag);
         System.out.println(people.getId()!=0);
         System.out.println(people.getId());
@@ -95,15 +150,17 @@ public class PeopleController {
         System.out.println(people.getSurName());
         System.out.println(people.getAge() != 0);
         System.out.println(people.getAge());*/
+
         if (people.getName() != "" && people.getSurName() != "" && people.getAge() != 0) {
             PeopleDAO.addPeople(peopleList, people);
-            model.addAttribute("addingPeople", PeopleDAO.getPeople(peopleList, people));
+            model.addAttribute("status", String.format("%s was adding to list",PeopleDAO.getPeople(peopleList, people)) );
 
         }
         if (PeopleDAO.getAllPeople(peopleList).size() != 0)
             model.addAttribute("allPeople", PeopleDAO.getAllPeople(peopleList));
         else
             model.addAttribute("allPeople", "Here not one person");
+        model.addAttribute("hidden",true);
         return "/views/people/people-create.html";
 //        return "redirect:people-create";
     }
