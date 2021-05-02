@@ -146,7 +146,7 @@
 <h2>
     <p>
     <h1>STATUS</h1></p>
-    <p th:text="${status}"></p>
+    <p th:text="${status}">ststus</p>
     <!--<p><h1>This Person people1</h1></p>
     <p th:text="${people1}"></p>-->
 </h2>
@@ -163,16 +163,16 @@
 <h1 th:text="${allPeopleHeader}">All Person</h1>
 </p>
 <div th:each="people : ${allPeople}">
-
+    <h3>
         <a th:href="@{/people/{id}(id=${people.getId()})}" th:text="${people.getName()}">User</a>
         <a th:href="@{/people/{id}/update(id=${people.getId()})}">Update</a>
-        <form th:method="delete" th:action="@{/people/{id}/delete(id=${people.getId()})}">
+        <form id="delete_form" th:method="delete" th:action="@{/people/{id}(id=${people.getId()})}">
             <br>
             <input type="submit" value="Delete">
 
         </form>
-<!--            <a th:method="delete" th:href="@{/people/{id}/delete(id=${people.getId()})}">Delete</a>-->
-
+        <!--            <a th:method="delete" th:href="@{/people/{id}/delete(id=${people.getId()})}">Delete</a>-->
+    </h3>
 </div>
 </body>
 </html>

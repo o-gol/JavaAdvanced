@@ -42,7 +42,8 @@ public class PeopleController {
         if (PeopleDAO.getAllPeople(peopleList).size() != 0)
             model.addAttribute("allPeople", PeopleDAO.getAllPeople(peopleList));
         else
-            model.addAttribute("allPeople", "Here not one person");
+//            model.addAttribute("allPeople", "Here not one person");
+            model.addAttribute("allPeople", new ArrayList<>());
 
 //        model.addAttribute("people1",new People());
 
@@ -112,18 +113,22 @@ public class PeopleController {
         return "/views/people/people-create.html";
     }
 
-
-    @DeleteMapping("/{id}/delete")
-    public String deletePeopleById(Model model,
-                                @PathVariable("id") int id) throws IOException, ClassNotFoundException {
-//        People beforeDeleting=CloneBySerializable.clone(PeopleDAO.getPeopleByID(peopleList,id));
+    @DeleteMapping("/{id}")
+    public String deletePeople(
+//            @ModelAttribute("hidden") boolean bool,
+//            @ModelAttribute("people1") People people,
+                               @PathVariable("id") int id
+                               ,Model model
+    ) throws IOException, ClassNotFoundException {
+        People beforeUpdate=CloneBySerializable.clone( PeopleDAO.getPeopleByID(peopleList,id));
         PeopleDAO.deletePeopleByID(peopleList,id);
-        /*model.addAttribute("hidden", true);
-        model.addAttribute("status", String.format("%s was deleted",beforeDeleting) );
         if (PeopleDAO.getAllPeople(peopleList).size() != 0)
             model.addAttribute("allPeople", PeopleDAO.getAllPeople(peopleList));
         else
-            model.addAttribute("allPeople", "Here not one person");*/
+            model.addAttribute("allPeople", new ArrayList<>());
+        model.addAttribute("hidden", true);
+        model.addAttribute("people1", new People());
+        model.addAttribute("status", String.format("%s was deleted",beforeUpdate) );
         return "/views/people/people-create.html";
 //                return "redirect:people-create";
 
@@ -140,16 +145,6 @@ public class PeopleController {
                                   Model model) {
         System.out.println(people);
         boolean flag=people.getName() != "" && people.getSurName() != "" && people.getAge() != 0;
-
-        /*System.out.println(flag);
-        System.out.println(people.getId()!=0);
-        System.out.println(people.getId());
-        System.out.println( people.getName() != null);
-        System.out.println( people.getName() );
-        System.out.println(people.getSurName() != null);
-        System.out.println(people.getSurName());
-        System.out.println(people.getAge() != 0);
-        System.out.println(people.getAge());*/
 
         if (people.getName() != "" && people.getSurName() != "" && people.getAge() != 0) {
             PeopleDAO.addPeople(peopleList, people);
