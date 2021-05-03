@@ -30,8 +30,17 @@
     </dependency>
 
 
-    <!-- https://mvnrepository.com/artifact/org.apache.tomcat/catalina -->
+    <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
     <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-catalina</artifactId>
+      <version>10.0.5</version>
+    </dependency>
+
+
+
+    <!-- https://mvnrepository.com/artifact/org.apache.tomcat/catalina -->
+    <!--<dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>catalina</artifactId>
       <version>6.0.26</version>
@@ -42,7 +51,7 @@
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-catalina</artifactId>
       <version>7.0.0</version>
-    </dependency>
+    </dependency>-->
 
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
     <dependency>
@@ -97,6 +106,14 @@
 
 
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+    <!--<dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>-->
+
+    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -104,13 +121,45 @@
       <scope>provided</scope>
     </dependency>
 
+
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>2.0.0-alpha1</version>
-      <scope>test</scope>
-    </dependency>
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+          <version>1.7.30</version>
+          <scope>test</scope>
+      </dependency>
+
+
+      <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api -->
+      <dependency>
+          <groupId>org.apache.tomcat</groupId>
+          <artifactId>tomcat-servlet-api</artifactId>
+          <version>10.0.5</version>
+      </dependency>
+
+
+
+          <!--<dependency>
+              <groupId> org.apache.cassandra</groupId>
+              <artifactId>cassandra-all</artifactId>
+              <version>0.8.1</version>
+
+              <exclusions>
+                  <exclusion>
+                      <groupId>org.slf4j</groupId>
+                      <artifactId>slf4j-log4j12</artifactId>
+                  </exclusion>
+                  <exclusion>
+                      <groupId>log4j</groupId>
+                      <artifactId>log4j</artifactId>
+                  </exclusion>
+              </exclusions>
+
+          </dependency>-->
+
+
+
 
 
 
