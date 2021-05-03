@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -64,6 +63,33 @@ public class SpringMVCConfig implements WebMvcConfigurer {
         return thymeleafViewResolver;
 
     }
+
+
+    /*@Bean
+    public Logger logger(){
+        Logger log4j=Logger.getLogger("logger");
+
+        //Log to Console as STDOUT
+        log4j.
+        log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+        log4j.appender.stdout.Target=System.out
+        log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+        log4j.appender.stdout.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c %3x - %m%n
+//Log to file FILE
+        log4j.appender.file=org.apache.log4j.DailyRollingFileAppender
+        log4j.appender.file.File=logfile.log
+        log4j.appender.file.DatePattern='.'yyyy-MM-dd
+        log4j.appender.file.append=true
+        log4j.appender.file.layout=org.apache.log4j.PatternLayout
+        log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c %3x - %m%n
+
+//Root Logger
+        log4j.rootLogger=INFO, stdout, file
+        return log4j;
+    }*/
+
+
+
     /*@Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
@@ -73,6 +99,18 @@ public class SpringMVCConfig implements WebMvcConfigurer {
     }*/
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 package ru.yandex.olejkai.config;
 
@@ -87,11 +125,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
-
 */
-/**
- * @author Neil Alishev
- *//*
+
+/*
 
 @Configuration
 @ComponentScan("ru.yandex.olejkai")

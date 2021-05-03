@@ -50,4 +50,13 @@ public class PeopleDAO {
 
         return peopleList;
     }
+
+    public static void updatePeople(List<People> list, People peopleForUpdate, People peopleFromUpdate){
+        getPeopleByID(list,peopleForUpdate.getId()).setName(peopleFromUpdate.getName());
+        getPeopleByID(list,peopleForUpdate.getId()).setSurName(peopleFromUpdate.getSurName());
+        getPeopleByID(list,peopleForUpdate.getId()).setAge(peopleFromUpdate.getAge());
+        getPeopleByID(list,peopleForUpdate.getId()).setEmail(peopleFromUpdate.getEmail());
+
+
+    }
 }

@@ -62,6 +62,7 @@
                        value=""
                        id="name">
                 <!--                    th:field="*{name}"-->
+                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name</div>
 
                 <br>
                 <label for="surName">Surname</label>
@@ -70,6 +71,7 @@
                        value=""
                        id="surName">
                 <!--                     th:field="*{surName}"-->
+                <div style="color:red" th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}">Name</div>
 
                 <br>
                 <label for="age">Age</label>
@@ -78,6 +80,19 @@
                        value="0"
                        id="age">
                 <!--                     th:field="*{age}"-->
+
+                <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age</div>
+
+
+                <br>
+                <label for="email">Email</label>
+                <input name="email"
+                       type="text"
+                       value="0"
+                       id="email">
+                <!--                     th:field="*{email}"-->
+
+                <div style="color:red"  th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email</div>
 
                 <br>
                 <input type="submit" value="Add Person">
@@ -94,12 +109,17 @@
                        type="text"
                        th:field="*{name}"
                        class="name">
+
+                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name</div>
+
                 <br>
                 <label for="surName">Surname</label>
                 <input name="surName"
                        type="text"
                        th:field="*{surName}"
                        class="surName">
+
+                <div style="color:red" th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}">Name</div>
 
                 <br>
                 <label for="age">Age</label>
@@ -108,7 +128,21 @@
                        th:field="*{age}"
                        class="age">
 
+                <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age</div>
+
                 <br>
+
+                <br>
+                <label for="email">Email</label>
+                <input name="email"
+                       type="text"
+                       value="0"
+                       th:field="*{email}"
+                       class="email">
+
+
+                <div style="color:red"  th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email</div>
+
                 <input type="submit" value="Update Person">
 
             </form>
