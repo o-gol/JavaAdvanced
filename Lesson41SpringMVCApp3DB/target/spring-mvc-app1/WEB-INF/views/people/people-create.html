@@ -17,19 +17,19 @@
 </p>
 
 <p>
-    <a href="/people/people-create?name=Alik&surName=Coce&age=25">
+    <a href="/people/people-create?name=Alik&surName=Coce&age=25&email=yryry@yyy.uy">
         Записать
     </a>
 </p>
 
 <p>
-    <a href="/people/people-create?name=Olli&surName=CocGGGe&age=29">
+    <a href="/people/people-create?name=Olli&surName=CocGGGe&age=29&email=yyyyyy@xxx.ru">
         Записать
     </a>
 </p>
 
 <p>
-    <a href="/people/people-create?name=Jimmy&surName=GGe&age=41">
+    <a href="/people/people-create?name=Jimmy&surName=GGe&age=41&email=tuyuy@ssss.yu">
         Записать
     </a>
 </p>
@@ -53,51 +53,55 @@
         <br>
         <input type="submit" value="Add Person">-->
         <h2>
-            <label for="create_form">Create Form</label>
-            <form id="create_form" th:method="post" th:action="@{/people/people-create}" th:object="${people1}">
+            <h2 hidden th:hidden="${hiddenCreate}">
+                <label for="create_form">Create Form</label>
 
-                <label for="name">Name</label>
-                <input name="name"
-                       type="text"
-                       value=""
-                       id="name">
-                <!--                    th:field="*{name}"-->
-                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name</div>
+                <form id="create_form" th:method="post" th:action="@{/people/people-create}" th:object="${people1}">
 
-                <br>
-                <label for="surName">Surname</label>
-                <input name="surName"
-                       type="text"
-                       value=""
-                       id="surName">
-                <!--                     th:field="*{surName}"-->
-                <div style="color:red" th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}">Name</div>
+                    <label for="name">Name</label>
+                    <input name="name"
+                           type="text"
 
-                <br>
-                <label for="age">Age</label>
-                <input name="age"
-                       type="text"
-                       value="0"
-                       id="age">
-                <!--                     th:field="*{age}"-->
+                           id="name"
+                           th:field="*{name}"
+                    >
+                    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name</div>
 
-                <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age</div>
+                    <br>
+                    <label for="surName">Surname</label>
+                    <input name="surName"
+                           type="text"
+                           id="surName"
+                           th:field="*{surName}"
+                    >
+                    <div style="color:red" th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}">Name</div>
+
+                    <br>
+                    <label for="age">Age</label>
+                    <input name="age"
+                           type="text"
+                           id="age"
+                           th:field="*{age}"
+                    >
+
+                    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age</div>
 
 
-                <br>
-                <label for="email">Email</label>
-                <input name="email"
-                       type="text"
-                       value="0"
-                       id="email">
-                <!--                     th:field="*{email}"-->
+                    <br>
+                    <label for="email">Email</label>
+                    <input name="email"
+                           type="text"
+                           id="email"
+                           th:field="*{email}"
+                    >
 
-                <div style="color:red"  th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email</div>
+                    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email</div>
 
-                <br>
-                <input type="submit" value="Add Person">
+                    <br>
+                    <input type="submit" value="Add Person">
 
-            </form>
+                </form>
+            </h2>
         </h2>
         <h2 hidden th:hidden="${hidden}">
             <label for="update_form">Update Form</label>
@@ -141,7 +145,7 @@
                        class="email">
 
 
-                <div style="color:red"  th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email</div>
+                <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email</div>
 
                 <input type="submit" value="Update Person">
 

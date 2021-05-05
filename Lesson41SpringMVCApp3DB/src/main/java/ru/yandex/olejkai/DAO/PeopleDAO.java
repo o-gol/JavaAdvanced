@@ -13,16 +13,15 @@ public class PeopleDAO {
                 int id=People.getGlobId()+1;
                 People.setGlobId(id);
                 people.setId(id);
-                list.add(people);
 
-        } else
-            list.add(people);
+        }
+        list.add(people);
     }
 
     public static void deletePeople(List<People> list, People people) {
         for (Object people1 :
                 list) {
-            if (people == (People) people1)
+            if (people == people1)
                 list.remove(people1);
         }
     }
@@ -30,7 +29,7 @@ public class PeopleDAO {
     public static People getPeople(List<People> list, People people) {
         for (Object people1 :
                 list) {
-            if (people == (People) people1)
+            if (people == people1)
                 return (People) people1;
         }
         return null;

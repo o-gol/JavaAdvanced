@@ -1,10 +1,12 @@
 package ru.yandex.olejkai.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
-import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,24 +18,35 @@ public class People implements Serializable {
 
 
     @NotEmpty(message = "Name is empty...")
+    @Size(
+            min = 2,
+            max = 20,
+            message = "must be between {min} and {max} characters long"
+    )
     private String name;
 
 
     @NotEmpty(message = "Surname is empty...")
+    @Size(
+            min = 2,
+            max = 20,
+            message = "must be between {min} and {max} characters long"
+    )
     private String surName;
 
 
     @NotEmpty(message = "Email is empty...")
     @Email(message = "It's not email...")
+    @Size(
+            min = 2,
+            max = 20,
+            message = "must be between 2 and 20 characters long"
+    )
     private String email;
 
 
-    @NotEmpty(message = "Age is empty...")
-    @Size(
-            min = 2,
-            max = 130,
-            message = "The license plate '${validatedValue}' must be between {min} and {max} characters long"
-    )
+    //@NotEmpty(message = "age is empty")
+    @Min(value = 0, message = "min 0")
     private int age;
 
     public People() {
