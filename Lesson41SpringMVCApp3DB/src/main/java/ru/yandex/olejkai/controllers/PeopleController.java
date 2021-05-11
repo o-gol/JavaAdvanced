@@ -21,7 +21,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
-    /*private final List<People> peopleList = new ArrayList();
+    private final List<People> peopleList = new ArrayList();
 
     {
         peopleList.add(new People("Tim", "Tyrri", 23, "ret5@tut.fd"));
@@ -30,18 +30,20 @@ public class PeopleController {
         peopleList.add(new People("Pick", "Mamy", 23, "34yfhui@tyui.zz"));
     }
 
-    PeopleDAO peopleDAO=new PeopleDAOToList(peopleList);*/
+    PeopleDAO peopleDAO=new PeopleDAOToList(peopleList);
 
-    Connectivity connectivity=new JDBCConnect();
-    PeopleDAO peopleDAO=new PeopleDAOToJDBC(connectivity);
+//    Connectivity connectivity=new JDBCConnect();
+//    PeopleDAO peopleDAO=new PeopleDAOToJDBC(connectivity);
 
 
 
 
 
     @GetMapping("/{id}")
-    public String getPeopleById(Model model,
-                                @PathVariable("id") int id) {
+    public String getPeopleById(
+                                @PathVariable("id") int id,
+                                Model model
+                                ) {
 
         model.addAttribute("findPersonById", peopleDAO.getPeopleByID( id));
         return "/views/people/show.html";
