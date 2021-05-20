@@ -77,4 +77,9 @@ public class PeopleDAOToList implements PeopleDAO {
         getPeopleByID( peopleForUpdate.getId()).setEmail(peopleFromUpdate.getEmail());
 
     }
+
+    @Override
+    public int getMaxId() {
+        return 0;
+    }
 }

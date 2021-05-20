@@ -30,10 +30,10 @@ public class PeopleController {
         peopleList.add(new People("Pick", "Mamy", 23, "34yfhui@tyui.zz"));
     }
 
-    PeopleDAO peopleDAO=new PeopleDAOToList(peopleList);
+//    PeopleDAO peopleDAO=new PeopleDAOToList(peopleList);
 
-//    Connectivity connectivity=new JDBCConnect();
-//    PeopleDAO peopleDAO=new PeopleDAOToJDBC(connectivity);
+    Connectivity connectivity=new JDBCConnect();
+    PeopleDAO peopleDAO=new PeopleDAOToJDBC(connectivity);
 
 
 
@@ -86,6 +86,7 @@ public class PeopleController {
 
             System.out.println(peopleInList);
         }
+        System.out.println(peopleDAO.getMaxId());
 
         System.out.println("---------------------End");
         return "views/people/people-create.html";

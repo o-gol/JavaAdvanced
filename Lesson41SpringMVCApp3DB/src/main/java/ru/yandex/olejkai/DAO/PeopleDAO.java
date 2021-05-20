@@ -12,5 +12,6 @@ public interface PeopleDAO {
     public  void deletePeopleByID( int id);
     public List<People> getAllPeople();
     public  void updatePeople( People peopleForUpdate, People peopleFromUpdate);
+    public int getMaxId();
 
 }
