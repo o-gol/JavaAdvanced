@@ -27,7 +27,7 @@ public class PeopleDAOToJDBC implements PeopleDAO {
         }
         JDBCConnect jdbcConnect=(JDBCConnect)connectivity;
         try {
-            jdbcConnect.connectQuery().executeUpdate(String.format("INSERT INTO people values (%s,%s,%s,%s,%s)",
+            jdbcConnect.connectQuery().executeUpdate(String.format("INSERT INTO people values (%s,'%s','%s','%s',%s)",
                     people.getId(),
                     people.getName(),
                     people.getSurName(),
@@ -71,17 +71,17 @@ public class PeopleDAOToJDBC implements PeopleDAO {
         ResultSet rs=null;
         try {
             rs = jdbcConnect.connectQuery().executeQuery("SELECT * FROM people");
-            if(!rs.isBeforeFirst()) {
+//            if(!rs.isBeforeFirst()) {
                 while (rs.next()) {
                     People people = new People();
                     people.setId(rs.getInt("id"));
                     people.setName(rs.getString("name"));
                     people.setSurName(rs.getString("surname"));
-                    people.setAge(rs.getInt("age"));
                     people.setEmail(rs.getString("email"));
+                    people.setAge(rs.getInt("age"));
                     list.add(people);
                 }
-            }
+//            }
 
         } catch (SQLException e) {
             e.printStackTrace();
