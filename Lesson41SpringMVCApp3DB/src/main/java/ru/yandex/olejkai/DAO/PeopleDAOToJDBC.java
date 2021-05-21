@@ -20,13 +20,13 @@ public class PeopleDAOToJDBC implements PeopleDAO {
     @Override
     public void addPeople(People people) {
 //        if (people.getId() == 0 || people.getId() < People.getGlobId()) {
-            People.setGlobId(getMaxId());
-            int id=People.getGlobId()+1;
-            People.setGlobId(id);
-            people.setId(id);
+        People.setGlobId(getMaxId());
+        int id = People.getGlobId() + 1;
+        People.setGlobId(id);
+        people.setId(id);
 
 //        }
-        JDBCConnect jdbcConnect=(JDBCConnect)connectivity;
+        JDBCConnect jdbcConnect = (JDBCConnect) connectivity;
         try {
             jdbcConnect.connectQuery().executeUpdate(String.format("INSERT INTO people values (%s,'%s','%s','%s',%s)",
                     people.getId(),
@@ -36,9 +36,15 @@ public class PeopleDAOToJDBC implements PeopleDAO {
                     people.getAge()));
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try { jdbcConnect.s.close(); } catch (Exception e) {  }
-            try { jdbcConnect.conn.close(); } catch (Exception e) {  }
+        } finally {
+            try {
+                jdbcConnect.s.close();
+            } catch (Exception e) {
+            }
+            try {
+                jdbcConnect.conn.close();
+            } catch (Exception e) {
+            }
         }
 
     }
@@ -64,48 +70,56 @@ public class PeopleDAOToJDBC implements PeopleDAO {
     }
 
 
-
     @Override
-    public  List<People> getAllPeople() {
-        JDBCConnect jdbcConnect= (JDBCConnect) connectivity;
+    public List<People> getAllPeople() {
+        JDBCConnect jdbcConnect = (JDBCConnect) connectivity;
         List<People> list = new ArrayList<>();
-        ResultSet rs=null;
+        ResultSet rs = null;
         try {
             rs = jdbcConnect.connectQuery().executeQuery("SELECT * FROM people");
 //            if(!rs.isBeforeFirst()) {
-                while (rs.next()) {
-                    People people = new People();
-                    people.setId(rs.getInt("id"));
-                    people.setName(rs.getString("name"));
-                    people.setSurName(rs.getString("surname"));
-                    people.setEmail(rs.getString("email"));
-                    people.setAge(rs.getInt("age"));
-                    list.add(people);
-                }
+            while (rs.next()) {
+                People people = new People();
+                people.setId(rs.getInt("id"));
+                people.setName(rs.getString("name"));
+                people.setSurName(rs.getString("surname"));
+                people.setEmail(rs.getString("email"));
+                people.setAge(rs.getInt("age"));
+                list.add(people);
+            }
 //            }
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try { rs.close(); } catch (Exception e) {  }
-            try { jdbcConnect.s.close(); } catch (Exception e) {  }
-            try { jdbcConnect.conn.close(); } catch (Exception e) {  }
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+            }
+            try {
+                jdbcConnect.s.close();
+            } catch (Exception e) {
+            }
+            try {
+                jdbcConnect.conn.close();
+            } catch (Exception e) {
+            }
         }
 
         return list;
     }
 
     @Override
-    public void updatePeople( People peopleForUpdate, People peopleFromUpdate) {
+    public void updatePeople(People peopleForUpdate, People peopleFromUpdate) {
 
     }
 
     @Override
     public int getMaxId() {
-        JDBCConnect jdbcConnect= (JDBCConnect) connectivity;
-        List<Integer> list=new ArrayList<>();
+        JDBCConnect jdbcConnect = (JDBCConnect) connectivity;
+        List<Integer> list = new ArrayList<>();
 //        List<People> list = new ArrayList<>();
-        ResultSet rs=null;
+        ResultSet rs = null;
         try {
             rs = jdbcConnect.connectQuery().executeQuery("SELECT id FROM people");
 //            if(!rs.isBeforeFirst()) {
@@ -123,11 +137,23 @@ public class PeopleDAOToJDBC implements PeopleDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try { rs.close(); } catch (Exception e) {  }
-            try { jdbcConnect.s.close(); } catch (Exception e) {  }
-            try { jdbcConnect.conn.close(); } catch (Exception e) {  }
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+            }
+            try {
+                jdbcConnect.s.close();
+            } catch (Exception e) {
+            }
+            try {
+                jdbcConnect.conn.close();
+            } catch (Exception e) {
+            }
         }
-        return Collections.max(list);
+        if (list.isEmpty())
+            return 0;
+        else
+            return Collections.max(list);
     }
 }
