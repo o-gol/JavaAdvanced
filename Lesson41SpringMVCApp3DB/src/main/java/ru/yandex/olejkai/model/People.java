@@ -6,8 +6,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 
-
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,8 +13,6 @@ public class People implements Serializable {
     private static int globId;
 
     private int id;
-
-
 
 
     @NotEmpty(message = "Name is empty...")
@@ -55,11 +51,11 @@ public class People implements Serializable {
     }
 
     public People(String name, String surName, int age, String email) {
-        globId++;
-        this.id=globId;
+        //globId++;
+        //this.id = globId;
         this.name = name;
         this.surName = surName;
-        this.email=email;
+        this.email = email;
         this.age = age;
     }
 
@@ -138,5 +134,12 @@ public class People implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, surName, email, age);
+    }
+
+    public boolean isEmpty() {
+        if (this.id == 0 && this.name == null && this.surName == null && this.age == 0)
+            return true;
+        else
+            return false;
     }
 }

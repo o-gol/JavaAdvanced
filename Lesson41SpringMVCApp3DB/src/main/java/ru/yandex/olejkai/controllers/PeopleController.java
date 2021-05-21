@@ -63,7 +63,8 @@ public class PeopleController {
         if (name != null && surName != null && age != null && email != null) {
             People thisPeople = new People(name, surName,  Integer.parseInt(age),email);
             peopleDAO.addPeople(thisPeople);
-            model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeople(thisPeople)) );
+//            model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeople(thisPeople)) );
+            model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeopleByID(thisPeople.getId())) );
         }
 
         if (peopleDAO.getAllPeople().size() != 0)
@@ -185,7 +186,8 @@ public class PeopleController {
             model.addAttribute("hidden", true);
             model.addAttribute("hiddenCreate", false);
 
-            model.addAttribute("status", String.format("%s was not adding to list", peopleDAO.getPeople( people)));
+            model.addAttribute("status", String.format("%s was not adding to list", peopleDAO.getPeopleByID( people.getId())));
+//            model.addAttribute("status", String.format("%s was not adding to list", peopleDAO.getPeople( people)));
 
             return "/views/people/people-create.html";
         }
@@ -194,7 +196,8 @@ public class PeopleController {
 
 //        if (people.getName() != "" && people.getSurName() != "" && people.getAge() != 0) {
         peopleDAO.addPeople( people);
-        model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeople( people)));
+        model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeopleByID( people.getId())));
+//        model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeople( people)));
 
 //        }
         if (peopleDAO.getAllPeople().size() != 0)

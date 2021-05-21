@@ -11,11 +11,11 @@ public class JDBCConnect implements Connectivity {
     public Connection conn;
     public Statement s;
 
-    public Statement connectQuery(){
+    public Statement connectQuery(String query){
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(PATH, USR, PASS);
-            s=conn.createStatement();
+            s=conn.prepareStatement(query);
 
         } catch (ClassNotFoundException | SQLException e) {
             try { conn.close(); } catch (Exception ee) {  }
