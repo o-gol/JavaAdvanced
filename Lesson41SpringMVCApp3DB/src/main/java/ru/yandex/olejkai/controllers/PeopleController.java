@@ -1,6 +1,8 @@
 package ru.yandex.olejkai.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,23 +23,23 @@ import java.util.List;
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
-    private final List<People> peopleList = new ArrayList();
 
-    {
-        peopleList.add(new People("Tim", "Tyrri", 23, "ret5@tut.fd"));
-        peopleList.add(new People("Typ", "Dibby", 54, "ser5@ttre.tr"));
-        peopleList.add(new People("Jack", "Ruret", 25, "yet@iyttut.mer"));
-        peopleList.add(new People("Pick", "Mamy", 23, "34yfhui@tyui.zz"));
-    }
 
 //    PeopleDAO peopleDAO=new PeopleDAOToList(peopleList);
+    boolean choose=true;
 
-    Connectivity connectivity=new JDBCConnect();
-    PeopleDAO peopleDAO=new PeopleDAOToJDBC(connectivity);
+        @Autowired
+        @Qualifier("jdbc")
+        PeopleDAO peopleDAO;
+
+        /*@Autowired
+        @Qualifier("list")
+        PeopleDAO peopleDAO;*/
 
 
-
-
+    /*public PeopleController(PeopleDAO peopleDAO) {
+        this.peopleDAO = peopleDAO;
+    }*/
 
     @GetMapping("/{id}")
     public String getPeopleById(

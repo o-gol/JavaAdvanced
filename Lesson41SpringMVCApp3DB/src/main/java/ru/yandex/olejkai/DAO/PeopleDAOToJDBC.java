@@ -1,5 +1,8 @@
 package ru.yandex.olejkai.DAO;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import ru.yandex.olejkai.connections.Connectivity;
 import ru.yandex.olejkai.connections.JDBCConnect;
 import ru.yandex.olejkai.model.People;
@@ -12,10 +15,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Component
+@Qualifier("jdbc")
 public class PeopleDAOToJDBC implements PeopleDAO {
     Connectivity connectivity;
-
+    @Autowired
     public PeopleDAOToJDBC(Connectivity connectivity) {
         this.connectivity = connectivity;
     }

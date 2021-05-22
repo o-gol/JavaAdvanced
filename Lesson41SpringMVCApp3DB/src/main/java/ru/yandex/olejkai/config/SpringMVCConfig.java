@@ -11,6 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import ru.yandex.olejkai.connections.Connectivity;
+import ru.yandex.olejkai.connections.JDBCConnect;
+import ru.yandex.olejkai.model.People;
+
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @ComponentScan("ru.yandex.olejkai")
@@ -63,6 +70,30 @@ public class SpringMVCConfig implements WebMvcConfigurer {
         return thymeleafViewResolver;
 
     }
+
+    @Bean
+    public Connectivity thisDbJDBCConnect(){
+        return new JDBCConnect("jdbc:postgresql://localhost:5432/first_db",
+                "postgres",
+                "pa44w0rd",
+                "org.postgresql.Driver");
+    }
+
+    
+    @Bean
+    public List<People> thisDbListConnect(){
+        final List<People> peopleList = new ArrayList();
+
+        {
+            peopleList.add(new People(0,"Tim", "Tyrri", 23, "ret5@tut.fd"));
+            peopleList.add(new People(0,"Typ", "Dibby", 54, "ser5@ttre.tr"));
+            peopleList.add(new People(0,"Jack", "Ruret", 25, "yet@iyttut.mer"));
+            peopleList.add(new People(0,"Pick", "Mamy", 23, "34yfhui@tyui.zz"));
+        }
+        return peopleList;
+    }
+
+
 
 
     /*@Bean

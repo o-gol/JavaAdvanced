@@ -58,6 +58,14 @@ public class People implements Serializable {
         this.email = email;
         this.age = age;
     }
+    public People(int id,String name, String surName, int age, String email) {
+        globId++;
+        this.id = globId;
+        this.name = name;
+        this.surName = surName;
+        this.email = email;
+        this.age = age;
+    }
 
 
     public String getEmail() {
