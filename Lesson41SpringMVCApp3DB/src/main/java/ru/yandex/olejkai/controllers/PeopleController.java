@@ -1,6 +1,8 @@
 package ru.yandex.olejkai.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,23 +23,23 @@ import java.util.List;
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
-    private final List<People> peopleList = new ArrayList();
-
-    {
-        peopleList.add(new People("Tim", "Tyrri", 23, "ret5@tut.fd"));
-        peopleList.add(new People("Typ", "Dibby", 54, "ser5@ttre.tr"));
-        peopleList.add(new People("Jack", "Ruret", 25, "yet@iyttut.mer"));
-        peopleList.add(new People("Pick", "Mamy", 23, "34yfhui@tyui.zz"));
-    }
-
-    PeopleDAO peopleDAO=new PeopleDAOToList(peopleList);
-
-//    Connectivity connectivity=new JDBCConnect();
-//    PeopleDAO peopleDAO=new PeopleDAOToJDBC(connectivity);
 
 
+//    PeopleDAO peopleDAO=new PeopleDAOToList(peopleList);
+    boolean choose=true;
+
+        @Autowired
+        @Qualifier("jdbc")
+        PeopleDAO peopleDAO;
+
+        /*@Autowired
+        @Qualifier("list")
+        PeopleDAO peopleDAO;*/
 
 
+    /*public PeopleController(PeopleDAO peopleDAO) {
+        this.peopleDAO = peopleDAO;
+    }*/
 
     @GetMapping("/{id}")
     public String getPeopleById(
@@ -63,7 +65,8 @@ public class PeopleController {
         if (name != null && surName != null && age != null && email != null) {
             People thisPeople = new People(name, surName,  Integer.parseInt(age),email);
             peopleDAO.addPeople(thisPeople);
-            model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeople(thisPeople)) );
+//            model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeople(thisPeople)) );
+            model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeopleByID(thisPeople.getId())) );
         }
 
         if (peopleDAO.getAllPeople().size() != 0)
@@ -86,6 +89,7 @@ public class PeopleController {
 
             System.out.println(peopleInList);
         }
+        System.out.println(peopleDAO.getMaxId());
 
         System.out.println("---------------------End");
         return "views/people/people-create.html";
@@ -184,7 +188,8 @@ public class PeopleController {
             model.addAttribute("hidden", true);
             model.addAttribute("hiddenCreate", false);
 
-            model.addAttribute("status", String.format("%s was not adding to list", peopleDAO.getPeople( people)));
+            model.addAttribute("status", String.format("%s was not adding to list", peopleDAO.getPeopleByID( people.getId())));
+//            model.addAttribute("status", String.format("%s was not adding to list", peopleDAO.getPeople( people)));
 
             return "/views/people/people-create.html";
         }
@@ -193,7 +198,8 @@ public class PeopleController {
 
 //        if (people.getName() != "" && people.getSurName() != "" && people.getAge() != 0) {
         peopleDAO.addPeople( people);
-        model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeople( people)));
+        model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeopleByID( people.getId())));
+//        model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeople( people)));
 
 //        }
         if (peopleDAO.getAllPeople().size() != 0)

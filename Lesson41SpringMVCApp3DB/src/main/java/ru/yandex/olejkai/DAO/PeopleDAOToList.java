@@ -1,21 +1,20 @@
 package ru.yandex.olejkai.DAO;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import ru.yandex.olejkai.connections.Connectivity;
 import ru.yandex.olejkai.connections.JDBCConnect;
 import ru.yandex.olejkai.model.People;
 
 import java.sql.SQLException;
 import java.util.List;
-
+@Component
+@Qualifier("list")
 public class PeopleDAOToList implements PeopleDAO {
 
-
-
-
-
-
     private final List<People> list;
-
+    @Autowired
     public PeopleDAOToList( List<People> list) {
         this.list = list;
 
@@ -76,5 +75,10 @@ public class PeopleDAOToList implements PeopleDAO {
         getPeopleByID(peopleForUpdate.getId()).setAge(peopleFromUpdate.getAge());
         getPeopleByID( peopleForUpdate.getId()).setEmail(peopleFromUpdate.getEmail());
 
+    }
+
+    @Override
+    public int getMaxId() {
+        return 0;
     }
 }
