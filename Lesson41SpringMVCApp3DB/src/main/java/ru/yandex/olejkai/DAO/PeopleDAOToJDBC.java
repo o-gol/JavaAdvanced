@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.olejkai.connections.Connectivity;
 import ru.yandex.olejkai.connections.JDBCConnect;
 import ru.yandex.olejkai.model.People;
+import ru.yandex.olejkai.utils.PeopleMapper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -85,25 +86,17 @@ public class PeopleDAOToJDBC implements PeopleDAO {
 //        List<People> list = new ArrayList<>();
         ResultSet rs = null;
         try {
-//            rs = jdbcConnect.connectQuery().executeQuery("SELECT * FROM people");
-            PreparedStatement ps=(PreparedStatement) jdbcConnect.connectQuery("SELECT * FROM people");
+            PreparedStatement ps=(PreparedStatement) jdbcConnect.connectQuery("SELECT * FROM people where id=?");
+            ps.setInt(1,id);
             rs = ps.executeQuery();
-//            if(!rs.isBeforeFirst()) {
-
-            while (rs.next()) {
-//                People people = new People();
-                if (rs.getInt("id") == id) {
-                    people.setName(rs.getString("name"));
-                    people.setId(rs.getInt("id"));
-                    people.setSurName(rs.getString("surname"));
-                    people.setEmail(rs.getString("email"));
-                    people.setAge(rs.getInt("age"));
-                    break;
-                }
-//                list.add(rs.getInt("id"));
+            if(rs.next()) {
+                people = JDBCConnect.getPeopleFromResultSet(rs);
             }
-//            }
-
+           /* people.setId(rs.getInt("id"));
+            people.setName(rs.getString("name"));
+            people.setSurName(rs.getString("surname"));
+            people.setEmail(rs.getString("email"));
+            people.setAge(rs.getInt("age"));*/
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -169,13 +162,14 @@ public class PeopleDAOToJDBC implements PeopleDAO {
             rs = ps.executeQuery();
 //            if(!rs.isBeforeFirst()) {
             while (rs.next()) {
-                People people = new People();
+                list.add(JDBCConnect.getPeopleFromResultSet(rs));
+                /*People people = new People();
                 people.setId(rs.getInt("id"));
                 people.setName(rs.getString("name"));
                 people.setSurName(rs.getString("surname"));
                 people.setEmail(rs.getString("email"));
                 people.setAge(rs.getInt("age"));
-                list.add(people);
+                list.add(people);*/
             }
 //            }
 
@@ -239,6 +233,42 @@ public class PeopleDAOToJDBC implements PeopleDAO {
     @Override
     public int getMaxId() {
         JDBCConnect jdbcConnect = (JDBCConnect) connectivity;
+//        List<Integer> list = new ArrayList<>();
+//        List<People> list = new ArrayList<>();
+        int i = 0;
+        ResultSet rs = null;
+        try {
+//            rs = jdbcConnect.connectQuery().executeQuery("SELECT id FROM people");
+            PreparedStatement ps=(PreparedStatement) jdbcConnect.connectQuery("SELECT MAX(id) FROM people");
+            rs = ps.executeQuery();
+            rs.next();
+            i=rs.getInt("max");
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+            } catch (Exception e) {
+            }
+            try {
+                jdbcConnect.s.close();
+            } catch (Exception e) {
+            }
+            try {
+                jdbcConnect.conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return i;
+    }
+
+
+    /*
+    @Override
+    public int getMaxId() {
+        JDBCConnect jdbcConnect = (JDBCConnect) connectivity;
         List<Integer> list = new ArrayList<>();
 //        List<People> list = new ArrayList<>();
         ResultSet rs = null;
@@ -249,12 +279,12 @@ public class PeopleDAOToJDBC implements PeopleDAO {
 //            if(!rs.isBeforeFirst()) {
 
             while (rs.next()) {
-                /*People people = new People();
+                *//*People people = new People();
                 people.setId(rs.getInt("id"));
                 people.setName(rs.getString("name"));
                 people.setSurName(rs.getString("surname"));
                 people.setEmail(rs.getString("email"));
-                people.setAge(rs.getInt("age"));*/
+                people.setAge(rs.getInt("age"));*//*
                 list.add(rs.getInt("id"));
             }
 //            }
@@ -279,5 +309,5 @@ public class PeopleDAOToJDBC implements PeopleDAO {
             return 0;
         else
             return Collections.max(list);
-    }
+    }*/
 }

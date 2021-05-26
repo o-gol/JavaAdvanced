@@ -29,7 +29,8 @@ public class PeopleController {
     boolean choose=true;
 
         @Autowired
-        @Qualifier("jdbc")
+        @Qualifier("jdbcTemplate")
+//        @Qualifier("jdbc")
         PeopleDAO peopleDAO;
 
         /*@Autowired
