@@ -3,6 +3,7 @@ package ru.yandex.olejkai.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.yandex.olejkai.connections.Connectivity;
 import ru.yandex.olejkai.connections.JDBCConnect;
 import ru.yandex.olejkai.model.People;
@@ -16,7 +17,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-@Component
+@Repository
 @Qualifier("jdbc")
 public class PeopleDAOToJDBC implements PeopleDAO {
     Connectivity connectivity;
@@ -67,7 +68,7 @@ public class PeopleDAOToJDBC implements PeopleDAO {
 
     }
 
-    @Override
+    /*@Override
     public void deletePeople(People people) {
 
     }
@@ -75,7 +76,7 @@ public class PeopleDAOToJDBC implements PeopleDAO {
     @Override
     public People getPeople(People people) {
         return null;
-    }
+    }*/
 
     @Override
     public People getPeopleByID(int id) {

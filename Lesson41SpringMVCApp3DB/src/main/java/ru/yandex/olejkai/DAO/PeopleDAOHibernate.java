@@ -1,16 +1,30 @@
 package ru.yandex.olejkai.DAO;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 import ru.yandex.olejkai.model.People;
 
 import java.util.List;
-
+@Repository
+@Qualifier("hibernate")
 public class PeopleDAOHibernate implements PeopleDAO {
-    @Override
-    public void addPeople(People people) {
 
+//    @Autowired
+    SessionFactory sessionFactory;
+
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
+    public void addPeople(People people) {
+    }
+
+    /*@Override
     public void deletePeople(People people) {
 
     }
@@ -18,7 +32,7 @@ public class PeopleDAOHibernate implements PeopleDAO {
     @Override
     public People getPeople(People people) {
         return null;
-    }
+    }*/
 
     @Override
     public People getPeopleByID(int id) {
@@ -32,7 +46,8 @@ public class PeopleDAOHibernate implements PeopleDAO {
 
     @Override
     public List<People> getAllPeople() {
-        return null;
+
+        return sessionFactory.getCurrentSession().createQuery("from People").list();
     }
 
     @Override

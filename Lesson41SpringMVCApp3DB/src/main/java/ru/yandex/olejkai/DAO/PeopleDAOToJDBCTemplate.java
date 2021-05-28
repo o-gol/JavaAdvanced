@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.yandex.olejkai.model.People;
 import ru.yandex.olejkai.utils.PeopleMapper;
 
@@ -14,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Component
+@Repository
 @Qualifier("jdbcTemplate")
 public class PeopleDAOToJDBCTemplate implements PeopleDAO {
     JdbcTemplate jdbcTemplate;
@@ -38,7 +39,7 @@ public class PeopleDAOToJDBCTemplate implements PeopleDAO {
 
     }
 
-    @Override
+    /*@Override
     public void deletePeople(People people) {
 
     }
@@ -46,7 +47,7 @@ public class PeopleDAOToJDBCTemplate implements PeopleDAO {
     @Override
     public People getPeople(People people) {
         return null;
-    }
+    }*/
 
     @Override
     public People getPeopleByID(int id) {
