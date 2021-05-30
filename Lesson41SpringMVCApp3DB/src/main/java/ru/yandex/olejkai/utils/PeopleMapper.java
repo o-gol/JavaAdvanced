@@ -1,5 +1,6 @@
 package ru.yandex.olejkai.utils;
 
+//import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import ru.yandex.olejkai.connections.JDBCConnect;
 import ru.yandex.olejkai.model.People;

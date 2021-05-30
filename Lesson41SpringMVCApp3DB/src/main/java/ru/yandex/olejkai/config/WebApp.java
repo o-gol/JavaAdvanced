@@ -16,7 +16,7 @@ public class WebApp extends AbstractAnnotationConfigDispatcherServletInitializer
     }
 
 
-    /*@Override
+   /* @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[0];
     }*/
