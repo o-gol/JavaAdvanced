@@ -1,5 +1,9 @@
 package ru.yandex.olejkai.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -8,13 +12,16 @@ import javax.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.Objects;
-
+@Entity
+@Table(name="people")
 public class People implements Serializable {
     private static int globId;
 
+    @Id
+    @Column(name="id")
     private int id;
 
-
+    @Column(name = "name")
     @NotEmpty(message = "Name is empty...")
     @Size(
             min = 2,
@@ -23,7 +30,7 @@ public class People implements Serializable {
     )
     private String name;
 
-
+    @Column(name="surname")
     @NotEmpty(message = "Surname is empty...")
     @Size(
             min = 2,
@@ -32,7 +39,7 @@ public class People implements Serializable {
     )
     private String surName;
 
-
+    @Column(name="email")
     @NotEmpty(message = "Email is empty...")
     @Email(message = "It's not email...")
     @Size(
@@ -42,7 +49,7 @@ public class People implements Serializable {
     )
     private String email;
 
-
+    @Column(name="age")
     //@NotEmpty(message = "age is empty")
     @Min(value = 0, message = "min 0")
     private int age;

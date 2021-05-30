@@ -5,6 +5,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -15,6 +19,7 @@ import ru.yandex.olejkai.connections.Connectivity;
 import ru.yandex.olejkai.connections.JDBCConnect;
 import ru.yandex.olejkai.model.People;
 
+import javax.sql.DataSource;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +27,16 @@ import java.util.List;
 @Configuration
 @ComponentScan("ru.yandex.olejkai")
 @EnableWebMvc
+@PropertySource(value = "classpath:db.properties")
 public class SpringMVCConfig implements WebMvcConfigurer {
+
+    private Environment environment;
     private final ApplicationContext context;
+
+    @Autowired
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -72,11 +85,30 @@ public class SpringMVCConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    public DataSource dataSource(){
+        DriverManagerDataSource dataSource=new DriverManagerDataSource();
+        dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
+        dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
+        dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
+        dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
+        return dataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate(){
+        JdbcTemplate jdbcTemplate=new JdbcTemplate();
+        jdbcTemplate.setDataSource(dataSource());
+        return jdbcTemplate;
+    }
+
+
+
+    @Bean
     public Connectivity thisDbJDBCConnect(){
-        return new JDBCConnect("jdbc:postgresql://localhost:5432/first_db",
-                "postgres",
-                "pa44w0rd",
-                "org.postgresql.Driver");
+        return new JDBCConnect(environment.getRequiredProperty("jdbc.url"),
+                environment.getRequiredProperty("jdbc.username"),
+                environment.getRequiredProperty("jdbc.password"),
+                environment.getRequiredProperty("jdbc.driverClassName"));
     }
 
     

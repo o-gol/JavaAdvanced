@@ -3,13 +3,14 @@ package ru.yandex.olejkai.DAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.yandex.olejkai.connections.Connectivity;
 import ru.yandex.olejkai.connections.JDBCConnect;
 import ru.yandex.olejkai.model.People;
 
 import java.sql.SQLException;
 import java.util.List;
-@Component
+@Repository
 @Qualifier("list")
 public class PeopleDAOToList implements PeopleDAO {
 
@@ -34,7 +35,7 @@ public class PeopleDAOToList implements PeopleDAO {
 
 
 
-    public  void deletePeople( People people) {
+    /*public  void deletePeople( People people) {
         for (Object people1 :
                 list) {
             if (people == people1)
@@ -50,7 +51,7 @@ public class PeopleDAOToList implements PeopleDAO {
                 return (People) people1;
         }
         return null;
-    }
+    }*/
 
     public People getPeopleByID( int id) {
         return list.stream().filter(people -> people.getId() == id).findAny().orElse(null);
@@ -81,4 +82,6 @@ public class PeopleDAOToList implements PeopleDAO {
     public int getMaxId() {
         return 0;
     }
+
+
 }
