@@ -1,6 +1,8 @@
 package ru.yandex.olejkai.controllers;
 
 
+
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.yandex.olejkai.DAO.PeopleDAO;
 import ru.yandex.olejkai.model.People;
 import ru.yandex.olejkai.services.PeopleServices;
+import ru.yandex.olejkai.services.PeopleServicesImpl;
 import ru.yandex.olejkai.utils.CloneBySerializable;
 
 import javax.validation.Valid;
@@ -18,6 +21,7 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
+    private static final Logger LOG=Logger.getLogger(PeopleServices.class);
 
 
 //    PeopleDAO peopleDAO=new PeopleDAOToList(peopleList);
@@ -87,10 +91,11 @@ public class PeopleController {
         for (People peopleInList :
                 peopleServices.getAllPeople()) {
 
-            System.out.println(peopleInList);
+//            System.out.println(peopleInList);
+            LOG.info(peopleInList);
         }
-        System.out.println(peopleServices.getMaxId());
-
+//        System.out.println(peopleServices.getMaxId());
+            LOG.info(peopleServices.getMaxId());
         System.out.println("---------------------End");
         return "views/people/people-create.html";
     }

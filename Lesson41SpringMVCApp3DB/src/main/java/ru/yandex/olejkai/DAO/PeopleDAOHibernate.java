@@ -1,5 +1,6 @@
 package ru.yandex.olejkai.DAO;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,13 +8,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import ru.yandex.olejkai.model.People;
 
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
+
 @Repository
 @Qualifier("hibernate")
 public class PeopleDAOHibernate implements PeopleDAO {
 
-//    @Autowired
-    SessionFactory sessionFactory;
+    //    @Autowired
+    private SessionFactory sessionFactory;
 
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
@@ -22,6 +26,7 @@ public class PeopleDAOHibernate implements PeopleDAO {
 
     @Override
     public void addPeople(People people) {
+
     }
 
     /*@Override
@@ -36,7 +41,12 @@ public class PeopleDAOHibernate implements PeopleDAO {
 
     @Override
     public People getPeopleByID(int id) {
-        return null;
+        People people;
+        try (Session session = sessionFactory.openSession()) {
+            people = session.get(People.class, id);
+        }
+        return people;
+//        return null;
     }
 
     @Override
@@ -48,6 +58,18 @@ public class PeopleDAOHibernate implements PeopleDAO {
     public List<People> getAllPeople() {
 
         return sessionFactory.getCurrentSession().createQuery("from People").list();
+       /* List<People> peopleList;
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaQuery cq = sessionFactory
+                    .getCurrentSession()
+                    .getCriteriaBuilder()
+                    .createQuery(People.class);
+            Root<People> root = cq.from(People.class);
+            cq.select(root);
+            peopleList = session.createQuery(cq)
+                    .getResultList();
+        }
+        return peopleList;*/
     }
 
     @Override

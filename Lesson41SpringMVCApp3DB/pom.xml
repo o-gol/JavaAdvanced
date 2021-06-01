@@ -131,12 +131,42 @@
 
 
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-<!--        <dependency>-->
-<!--          <groupId>org.slf4j</groupId>-->
-<!--          <artifactId>slf4j-log4j12</artifactId>-->
-<!--          <version>1.7.30</version>-->
-<!--          <scope>test</scope>-->
-<!--        </dependency>-->
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+          <version>1.7.30</version>
+          <scope>test</scope>
+        </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
+      <scope>compile</scope>
+    </dependency>
+
+
+    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.logging.log4j</groupId>-->
+<!--      <artifactId>log4j-slf4j-impl</artifactId>-->
+<!--      <version>2.14.1</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.logging.log4j</groupId>-->
+<!--      <artifactId>log4j-api</artifactId>-->
+<!--      <version>2.14.1</version>-->
+<!--      <scope>compile</scope>-->
+<!--    </dependency>-->
+
+
+    <!-- https://mvnrepository.com/artifact/org.apache.log4j/log4j -->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.log4j</groupId>-->
+<!--      <artifactId>log4j</artifactId>-->
+<!--      <version>1.2.16</version>-->
+<!--    </dependency>-->
+
 
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 <!--    <dependency>-->
