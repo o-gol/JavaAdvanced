@@ -265,6 +265,11 @@ public class PeopleDAOToJDBC implements PeopleDAO {
         return i;
     }
 
+    @Override
+    public void manySave() {
+
+    }
+
 
     /*
     @Override

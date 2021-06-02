@@ -13,6 +13,7 @@ public interface PeopleServices {
     public List<People> getAllPeople();
     public  void updatePeople( People peopleForUpdate, People peopleFromUpdate);
     public int getMaxId();
+    public void manySave();
 
 
 }

@@ -99,5 +99,10 @@ public class PeopleDAOToJDBCTemplate implements PeopleDAO {
         });
     }
 
+    @Override
+    public void manySave() {
+
+    }
+
 
 }

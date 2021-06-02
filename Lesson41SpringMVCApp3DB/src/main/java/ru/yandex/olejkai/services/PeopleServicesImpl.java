@@ -17,6 +17,10 @@ public class PeopleServicesImpl implements PeopleServices {
 //    @Qualifier("jdbcTemplate")
     private PeopleDAO peopleDAO;
 
+    public PeopleDAO getPeopleDAO() {
+        return peopleDAO;
+    }
+
     /*@Autowired
     public PeopleServicesHibernate(PeopleDAO peopleDAO) {
         this.peopleDAO = peopleDAO;
@@ -52,4 +56,11 @@ public class PeopleServicesImpl implements PeopleServices {
     public int getMaxId() {
         return peopleDAO.getMaxId();
     }
+
+    @Override
+    public void manySave() {
+        peopleDAO.manySave();
+    }
+
+
 }

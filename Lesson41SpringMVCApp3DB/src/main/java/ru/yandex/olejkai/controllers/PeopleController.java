@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.olejkai.DAO.PeopleDAO;
+import ru.yandex.olejkai.DAO.PeopleDAOHibernate;
 import ru.yandex.olejkai.model.People;
 import ru.yandex.olejkai.services.PeopleServices;
 import ru.yandex.olejkai.services.PeopleServicesImpl;
@@ -30,7 +31,8 @@ public class PeopleController {
 //        @Autowired
 //        @Qualifier("jdbcTemplate")
 //        @Qualifier("jdbc")
-        PeopleServices peopleServices;
+    PeopleServices peopleServices;
+//        PeopleServicesImpl peopleServices;
 
         /*@Autowired
         @Qualifier("list")
@@ -44,6 +46,11 @@ public class PeopleController {
     public PeopleController(PeopleServices peopleServices) {
         this.peopleServices = peopleServices;
     }
+
+   /*@Autowired
+    public void setPeopleServices(PeopleServicesImpl peopleServices) {
+        this.peopleServices = peopleServices;
+    }*/
 
     @GetMapping("/{id}")
     public String getPeopleById(
@@ -72,6 +79,8 @@ public class PeopleController {
 //            model.addAttribute("status", String.format("%s was adding to list", peopleDAO.getPeople(thisPeople)) );
             model.addAttribute("status", String.format("%s was adding to list", peopleServices.getPeopleByID(thisPeople.getId())) );
         }
+
+//        peopleServices.manySave();
 
         if (peopleServices.getAllPeople().size() != 0)
             model.addAttribute("allPeople", peopleServices.getAllPeople());

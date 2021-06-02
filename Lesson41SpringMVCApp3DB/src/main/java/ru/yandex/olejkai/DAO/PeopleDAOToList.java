@@ -83,5 +83,10 @@ public class PeopleDAOToList implements PeopleDAO {
         return 0;
     }
 
+    @Override
+    public void manySave() {
+
+    }
+
 
 }

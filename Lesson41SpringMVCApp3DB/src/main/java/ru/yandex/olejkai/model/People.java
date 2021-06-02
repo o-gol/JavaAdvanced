@@ -1,5 +1,8 @@
 package ru.yandex.olejkai.model;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +17,8 @@ import java.io.Serializable;
 import java.util.Objects;
 @Entity
 @Table(name="people")
+@DynamicInsert
+@DynamicUpdate
 public class People implements Serializable {
     private static int globId;
 
