@@ -28,9 +28,13 @@ public class WebApp extends AbstractAnnotationConfigDispatcherServletInitializer
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{"/","*.form"};
     }
 
+    @Override
+    protected String getServletName() {
+        return "org.springframework.web.servlet.DispatcherServlet";
+    }
 
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
@@ -38,13 +42,13 @@ public class WebApp extends AbstractAnnotationConfigDispatcherServletInitializer
         registerHiddenFieldFilter(aServletContext);
     }
 
-    @Override
+    /*@Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
         return new Filter[] {characterEncodingFilter};
-    }
+    }*/
 
     private void registerHiddenFieldFilter(ServletContext aContext) {
         aContext.addFilter("hiddenHttpMethodFilter",

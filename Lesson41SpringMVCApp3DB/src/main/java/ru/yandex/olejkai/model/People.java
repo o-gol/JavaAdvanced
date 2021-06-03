@@ -3,10 +3,7 @@ package ru.yandex.olejkai.model;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -15,15 +12,17 @@ import javax.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 @Entity
-@Table(name="people")
+@Table(name = "people")
 @DynamicInsert
 @DynamicUpdate
 public class People implements Serializable {
     private static int globId;
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")
@@ -35,7 +34,7 @@ public class People implements Serializable {
     )
     private String name;
 
-    @Column(name="surname")
+    @Column(name = "surname")
     @NotEmpty(message = "Surname is empty...")
     @Size(
             min = 2,
@@ -44,7 +43,7 @@ public class People implements Serializable {
     )
     private String surName;
 
-    @Column(name="email")
+    @Column(name = "email")
     @NotEmpty(message = "Email is empty...")
     @Email(message = "It's not email...")
     @Size(
@@ -54,7 +53,7 @@ public class People implements Serializable {
     )
     private String email;
 
-    @Column(name="age")
+    @Column(name = "age")
     //@NotEmpty(message = "age is empty")
     @Min(value = 0, message = "min 0")
     private int age;
@@ -70,7 +69,8 @@ public class People implements Serializable {
         this.email = email;
         this.age = age;
     }
-    public People(int id,String name, String surName, int age, String email) {
+
+    public People(int id, String name, String surName, int age, String email) {
         globId++;
         this.id = globId;
         this.name = name;

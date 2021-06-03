@@ -209,6 +209,7 @@ public class PeopleController {
         }
 
         System.out.println(people);
+        LOG.warn(String.format("people from binding result %s",people));
 
 //        if (people.getName() != "" && people.getSurName() != "" && people.getAge() != 0) {
         peopleServices.addPeople( people);
