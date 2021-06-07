@@ -22,6 +22,8 @@ public class WebApp extends AbstractAnnotationConfigDispatcherServletInitializer
         return new Class[0];
     }*/
 
+
+
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{SpringMVCConfig.class};
@@ -29,7 +31,9 @@ public class WebApp extends AbstractAnnotationConfigDispatcherServletInitializer
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/","*.form"};
+        return new String[]{"/",
+//                "*.form"
+        };
     }
 
     @Override
@@ -40,12 +44,17 @@ public class WebApp extends AbstractAnnotationConfigDispatcherServletInitializer
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
-        registerHiddenFieldFilter(aServletContext);
 
         FilterRegistration.Dynamic encodingFilter = aServletContext.addFilter("encoding-filter", new CharacterEncodingFilter());
+//        CharacterEncodingFilter filter=new CharacterEncodingFilter();
+//        encodingFilter.setInitParameter("charset", "UTF-8");
         encodingFilter.setInitParameter("encoding", "UTF-8");
         encodingFilter.setInitParameter("forceEncoding", "true");
         encodingFilter.addMappingForUrlPatterns(null, true, "/*");
+
+        registerHiddenFieldFilter(aServletContext);
+
+
     }
 
     /*@Override
