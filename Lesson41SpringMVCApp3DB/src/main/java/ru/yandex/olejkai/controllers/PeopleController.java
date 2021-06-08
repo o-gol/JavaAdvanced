@@ -104,7 +104,7 @@ public class PeopleController {
             LOG.info(peopleInList);
         }
 //        System.out.println(peopleServices.getMaxId());
-            LOG.info(peopleServices.getMaxId());
+//            LOG.info(peopleServices.getMaxId());
         System.out.println("---------------------End");
         return "views/people/people-create.html";
     }

@@ -31,17 +31,18 @@ public class PeopleDAOHibernate implements PeopleDAO {
 
     @Override
     public void addPeople(People people) {
-        if (people.getId() == 0) {
+        /*if (people.getId() == 0) {
 //        if (people.getId() == 0 || people.getId() < People.getGlobId()) {
             People.setGlobId(getMaxId());
             int id = People.getGlobId() + 1;
             People.setGlobId(id);
             people.setId(id);
 
-        }
+        }*/
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.save(people);
+            session.persist(people);
+//            session.save(people);
             session.getTransaction().commit();
         }
 
@@ -70,14 +71,15 @@ public class PeopleDAOHibernate implements PeopleDAO {
 
     @Override
     public void deletePeopleByID(int id) {
-        People people = getPeopleByID(id);
-        if (people != null) {
+//        People people = getPeopleByID(id);
+//        if (people != null) {
             try (Session session = sessionFactory.openSession()) {
                 session.beginTransaction();
+                People people = session.get(People.class, id);
                 session.delete(people);
                 session.getTransaction().commit();
             }
-        }
+//        }
 
 
     }

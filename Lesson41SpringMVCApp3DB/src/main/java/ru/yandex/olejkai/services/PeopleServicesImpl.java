@@ -54,7 +54,8 @@ public class PeopleServicesImpl implements PeopleServices {
 
     @Override
     public int getMaxId() {
-        return peopleDAO.getMaxId();
+//        return peopleDAO.getMaxId();
+        return 0;
     }
 
     @Override
