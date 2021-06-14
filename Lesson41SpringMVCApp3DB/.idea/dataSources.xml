@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/first_db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="tracking_requests@localhost" uuid="063c9334-6a38-41f0-a598-5db83210b86c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/tracking_requests</jdbc-url>
+    </data-source>
   </component>
 </project>
