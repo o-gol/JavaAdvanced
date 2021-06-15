@@ -21,7 +21,7 @@ public class EmployeeRole implements Serializable {
     @Column(name = "role_id", nullable = false)
     private Long roleId;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
