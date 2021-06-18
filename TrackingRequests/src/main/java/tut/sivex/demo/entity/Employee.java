@@ -18,12 +18,23 @@ public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Column(name = "parent_id",insertable = false, updatable = false)
+    private Long parentId;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Employee employee;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "department_id", nullable = false)
+
+    @Column(name = "tab_number",unique = true,  nullable = false)
+    private Integer tabNumber;
+
+    @Column(name = "department_id", nullable = false, insertable = false, updatable = false)
     private Long departmentId;
 
     @ManyToOne
@@ -36,19 +47,13 @@ public class Employee implements Serializable {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name="post_id",nullable = false)
+    @Column(name="post_id",nullable = false,insertable = false, updatable = false)
     private Long postId;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @Column(name = "parent_id")
-    private Long parentId;
-
-    @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private Employee employee;
 
 
     @Column(length = 3000)
@@ -56,12 +61,12 @@ public class Employee implements Serializable {
 
     @ElementCollection(targetClass = Role.class)
     @CollectionTable(name="employee_role",
-    joinColumns = {@JoinColumn(name= "employee_id"),@JoinColumn(name = "role_id")}
+    joinColumns = {@JoinColumn( name = "employee_id")}
      )
     private Set<Role> roles=new HashSet<>();
 
-    @OneToMany(targetEntity = Order.class, mappedBy = "employeeCustomer")
-    private List<Order> orders=new ArrayList<>();
+    @OneToMany(targetEntity = OrderTable.class, mappedBy = "employeeCustomer")
+    private List<OrderTable> orderTables =new ArrayList<>();
 
     @Transient
     private Collection<? extends GrantedAuthority> authorities;

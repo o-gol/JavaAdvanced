@@ -20,7 +20,7 @@ public class Department implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "parent_id")
+    @Column(name = "parent_id",insertable = false, updatable = false)
     private Long parentId;
 
     @ManyToOne

@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
  */
 @Data
 @Entity
-@Table(name = "order")
-public class Order implements Serializable {
+@Table(name = "order_table")
+public class OrderTable implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class Order implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "employee_id", nullable = false)
+    @Column(name = "employee_id", nullable = false, insertable = false, updatable = false)
     private Long employeeId;
 
     @ManyToOne
@@ -48,7 +48,7 @@ public class Order implements Serializable {
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     private LocalDateTime dateFinished;
 
-    @Column(name = "department_id")
+    @Column(name = "department_id", insertable = false, updatable = false)
     private Long departmentId;
 
     @ManyToOne
